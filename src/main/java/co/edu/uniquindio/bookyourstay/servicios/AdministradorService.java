@@ -7,11 +7,10 @@ public class AdministradorService extends UsuarioService {
 
     @Override
     public void iniciarSesion(String email, String contraseña) {
-        if()
     }
 
     @Override
-    public void cambiarContrasenia() {
+    public void cambiarContrasenia(String contraseña) {
 
     }
 

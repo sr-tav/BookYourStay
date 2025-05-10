@@ -15,6 +15,6 @@ public class Reserva {
     Cliente cliente;
     Alojamiento alojamiento;
     LocalDate fechaInicio, fechaFin;
-    byte numHuespedes;
+    int numHuespedes;
     Factura factura;
 }

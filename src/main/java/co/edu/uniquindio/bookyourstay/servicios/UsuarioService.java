@@ -4,5 +4,5 @@ public abstract class UsuarioService {
 
     public abstract void iniciarSesion(String email, String contraseña);
 
-    public abstract void cambiarContrasenia();
+    public abstract void cambiarContrasenia(String contraseña);
 }
