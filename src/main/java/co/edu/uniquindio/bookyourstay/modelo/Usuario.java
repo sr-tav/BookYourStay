@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public abstract class Usuario {
 
-    private String nombre, cedula, telefono, email, contrasenia;
+    private String nombre, cedula, telefono, email, contrasenia, codigoActivacion;
     private Boolean estadoCuenta;
 
 }

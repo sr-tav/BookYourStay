@@ -16,5 +16,6 @@ public class Reseña {
     Alojamiento alojamiento;
     String comentario;
     LocalDate fecha;
+    int calificacion;
 
 }

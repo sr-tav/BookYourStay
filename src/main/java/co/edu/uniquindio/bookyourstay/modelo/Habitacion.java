@@ -10,6 +10,7 @@ import lombok.Setter;
 
 public class Habitacion {
     String numero, descripcion;
+    int precio;
     byte capacidad;
 
 }

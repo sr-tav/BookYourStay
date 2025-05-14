@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 public class BilleteraVirtual {
 
-    private int saldo;
+    private float saldo;
 
 }

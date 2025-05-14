@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Reserva {
 
+    String id;
     Cliente cliente;
     Alojamiento alojamiento;
     LocalDate fechaInicio, fechaFin;
