@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.modelo;
 
+import co.edu.uniquindio.bookyourstay.util.QRUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class Factura {
 
     String id;
     LocalDate fecha;
-    int subtotal, total;
+    float subtotal, total;
+
 
 }
