@@ -1,37 +1,53 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
-import co.edu.uniquindio.bookyourstay.modelo.Cliente;
-import co.edu.uniquindio.bookyourstay.modelo.Factura;
-import co.edu.uniquindio.bookyourstay.modelo.Reserva;
-import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
+import co.edu.uniquindio.bookyourstay.modelo.*;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Apartamento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Casa;
+import co.edu.uniquindio.bookyourstay.repositorios.AlojamientoRepositorio;
+import co.edu.uniquindio.bookyourstay.repositorios.ReseniaRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.ReservaRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
-
+import co.edu.uniquindio.bookyourstay.util.EmailUtil;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
+
+
 
 public class ReservaService {
 
     private final ReservaRepositorio reservaRepositorio;
     private final UsuarioRepositorio usuarioRepositorio;
+    private final AlojamientoRepositorio alojamientoRepositorio;
+    private final ReseniaRepositorio reseniaRepositorio;
 
-    public ReservaService(ReservaRepositorio reservaRepositorio, UsuarioRepositorio usuarioRepositorio) {
+    public ReservaService(ReservaRepositorio reservaRepositorio, UsuarioRepositorio usuarioRepositorio, AlojamientoRepositorio alojamientoRepositorio, ReseniaRepositorio reseniaRepositorio) {
         this.reservaRepositorio = reservaRepositorio;
         this.usuarioRepositorio = usuarioRepositorio;
+        this.alojamientoRepositorio = alojamientoRepositorio;
+        this.reseniaRepositorio = reseniaRepositorio;
     }
 
+    /**
+     * metodo que valida disponibilidad del alojamiento
+     * @param alojamiento
+     * @param inicio
+     * @param fin
+     * @return
+     */
     public boolean validarDisponibilidad(Alojamiento alojamiento, LocalDate inicio, LocalDate fin) {
         List<Reserva> reservas = reservaRepositorio.listar();
 
         for (Reserva r : reservas) {
             if (r.getAlojamiento().getId().equals(alojamiento.getId())) {
-                boolean invalido = !(fin.isBefore(r.getFechaInicio()) || inicio.isAfter(r.getFechaFin()));
-                if (invalido) {
-                    return false; // Ya hay una reserva que se topa con las fechas
+                boolean seSolapan = !(fin.isBefore(r.getFechaInicio()) || inicio.isAfter(r.getFechaFin()));
+                if (seSolapan) {
+                    return false;
                 }
             }
         }
@@ -39,10 +55,101 @@ public class ReservaService {
         return true;
     }
 
+    /**
+     * metodo que valida la capacidad del alojamiento
+     * @param alojamiento
+     * @param cantidad
+     * @return
+     */
     public boolean validarCapacidad(Alojamiento alojamiento, int cantidad) {
         return alojamiento.getCapacidadMaxima() >= cantidad;
     }
 
+    /**
+     * metodo que realiza reservas
+     * @param cedulaCliente
+     * @param alojamiento
+     * @param inicio
+     * @param fin
+     * @param huespedes
+     * @return
+     * @throws Exception
+     */
+    public Factura realizarReserva(String cedulaCliente, Alojamiento alojamiento, LocalDate inicio, LocalDate fin, int huespedes) throws Exception {
+        Cliente cliente = (Cliente) usuarioRepositorio.obtenerPorCedula(cedulaCliente);
+
+        if (cliente == null) {
+            throw new Exception("El cliente no existe.");
+        }
+
+        if (!validarCapacidad(alojamiento, huespedes)) {
+            throw new Exception("El alojamiento no soporta esa cantidad de huéspedes.");
+        }
+
+        if (!validarDisponibilidad(alojamiento, inicio, fin)) {
+            throw new Exception("El alojamiento no está disponible en esas fechas.");
+        }
+
+        if (fin.isBefore(inicio) || fin.isEqual(inicio)) {
+            throw new Exception("La fecha de fin debe ser posterior a la de inicio.");
+        }
+
+        Reserva reserva = Reserva.builder()
+                .id(UUID.randomUUID().toString())
+                .cliente(cliente)
+                .alojamiento(alojamiento)
+                .fechaInicio(inicio)
+                .fechaFin(fin)
+                .numHuespedes(huespedes)
+                .factura(null)
+                .build();
+
+
+        Factura factura = generarFactura(reserva);
+        reserva.setFactura(factura);
+
+        reservaRepositorio.agregar(reserva);
+
+        String mensaje = cliente.getNombre()
+                + "\nAlojamiento: " + alojamiento.getNombre()
+                + "\nCiudad: " + alojamiento.getCiudad()
+                + "\nDesde: " + inicio
+                + "\nHasta: " + fin
+                + "\nSubtotal: $" + factura.getSubtotal()
+                + "\nTotal: $" + factura.getTotal();
+
+        EmailUtil.enviarNotificacion(cliente.getEmail(), "Se ha realizado una reserva", mensaje);
+
+        return factura;
+    }
+
+    /**
+     * metodo que cancela reservas
+     * @param reserva
+     */
+    public void cancelarReserva(Reserva reserva) {
+        reservaRepositorio.eliminar(reserva);
+    }
+
+    /**
+     * metodo que genera facturas
+     * @param reserva
+     * @return
+     */
+    public Factura generarFactura(Reserva reserva) {
+        float subtotal = calcularSubtotal(reserva);
+        float total = subtotal;
+        String id = UUID.randomUUID().toString();
+        LocalDate fecha = LocalDate.now();
+
+        return new Factura(id, fecha, subtotal, total);
+    }
+
+    /**
+     * metodo que calcula subtotal
+     * @param reserva
+     * @return
+     */
     private float calcularSubtotal(Reserva reserva) {
         Alojamiento alojamiento = reserva.getAlojamiento();
         LocalDate inicio = reserva.getFechaInicio();
@@ -60,41 +167,31 @@ public class ReservaService {
         return subtotal;
     }
 
-    public Factura generarFactura(Reserva reserva) {
-        if (reserva == null) {
-            throw new IllegalArgumentException("La reserva no puede ser nula");
+    /**
+     * metodo que obtiene los alojamientos mas rentables
+     * @return
+     */
+    public Map<String, Double> obtenerTiposAlojamientoMasRentables() {
+        List<Reserva> reservas = reservaRepositorio.listar();
+        Map<String, Double> ingresosPorTipo = new HashMap<>();
+
+        for (Reserva reserva : reservas) {
+            Alojamiento alojamiento = reserva.getAlojamiento();
+            String tipo = alojamiento.getTipo();
+            double ingreso = reserva.getFactura() != null ? reserva.getFactura().getTotal() : 0;
+
+            ingresosPorTipo.put(tipo, ingresosPorTipo.getOrDefault(tipo, 0.0) + ingreso);
         }
 
-        float subtotal = calcularSubtotal(reserva);
-        float iva = subtotal * 0.16f; // Ejemplo: 16% de IVA
-        float total = subtotal + iva;
-
-        String uuid = UUID.randomUUID().toString();
-        LocalDate fechaEmision = LocalDate.now(); // Usando el API moderno
-
-
-        return new Factura(
-                uuid,
-                fechaEmision,
-                subtotal,
-                total
-        );
+        return ingresosPorTipo.entrySet().stream()
+                .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 
-    public Reserva realizarReserva(Cliente cliente, Alojamiento alojamiento, LocalDate inicio, LocalDate fin, int huespedes, Factura factura) {
-        if (!validarCapacidad(alojamiento, huespedes)) return null;
-        if (!validarDisponibilidad(alojamiento, inicio, fin)) return null;
 
-        Reserva reserva = new Reserva(UUID.randomUUID().toString(), cliente, alojamiento, inicio, fin, huespedes, factura);
-
-        Factura factura = generarFactura(reserva);
-        reserva.setFactura(factura);
-
-        reservaRepositorio.agregar(reserva);
-        return reserva;
-    }
-
-    public void cancelarReserva(Reserva reserva) {
-        reservaRepositorio.eliminar(reserva);
-    }
 }

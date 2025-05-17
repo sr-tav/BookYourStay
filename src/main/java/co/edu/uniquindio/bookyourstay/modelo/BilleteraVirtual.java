@@ -1,6 +1,7 @@
 package co.edu.uniquindio.bookyourstay.modelo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

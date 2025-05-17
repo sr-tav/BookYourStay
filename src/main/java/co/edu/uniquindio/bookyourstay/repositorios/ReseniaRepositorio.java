@@ -1,25 +1,25 @@
 package co.edu.uniquindio.bookyourstay.repositorios;
 
-import co.edu.uniquindio.bookyourstay.modelo.Reseña;
+import co.edu.uniquindio.bookyourstay.modelo.Resenia;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReseñaRepositorio {
+public class ReseniaRepositorio {
 
-    private List<Reseña> resenas;
+    private List<Resenia> resenas;
 
-    public ReseñaRepositorio() {
+    public ReseniaRepositorio() {
         this.resenas = new ArrayList<>();
     }
 
-    public void agregar(Reseña resena) {
+    public void agregar(Resenia resena) {
         resenas.add(resena);
     }
 
-    public List<Reseña> obtenerPorAlojamiento(String idAlojamiento) {
-        List<Reseña> resultado = new ArrayList<>();
-        for (Reseña r : resenas) {
+    public List<Resenia> obtenerPorAlojamiento(String idAlojamiento) {
+        List<Resenia> resultado = new ArrayList<>();
+        for (Resenia r : resenas) {
             if (r.getAlojamiento().getId().equals(idAlojamiento)) {
                 resultado.add(r);
             }
@@ -27,7 +27,7 @@ public class ReseñaRepositorio {
         return resultado;
     }
 
-    public List<Reseña> listar() {
+    public List<Resenia> listar() {
         return new ArrayList<>(resenas);
     }
 }

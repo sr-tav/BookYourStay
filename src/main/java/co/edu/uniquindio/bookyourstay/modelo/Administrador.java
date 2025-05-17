@@ -1,14 +1,12 @@
 package co.edu.uniquindio.bookyourstay.modelo;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Setter
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 public class Administrador extends Usuario{
-
-    public Administrador(String nombre, String cedula, String telefono, String email, String contrasenia, String codigoActivacion) {
-        super(nombre, cedula, telefono, email, contrasenia, codigoActivacion, true);
-    }
-
 }

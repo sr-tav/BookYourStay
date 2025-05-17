@@ -1,6 +1,6 @@
 package co.edu.uniquindio.bookyourstay.repositorios;
 
-import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
+import co.edu.uniquindio.bookyourstay.modelo.Alojamiento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,16 @@ public class AlojamientoRepositorio {
         for (Alojamiento a : alojamientos) {
             if (a.getId().equals(id)) {
                 return a;
+            }
+        }
+        return null;
+    }
+
+    public List<Alojamiento> obtenerPorCiudad(String ciudad) {
+        List<Alojamiento> alojamientosCiudad = new ArrayList<>();
+        for (Alojamiento a : alojamientos) {
+            if (a.getCiudad().equals(ciudad)) {
+                alojamientosCiudad.add(a);
             }
         }
         return null;
