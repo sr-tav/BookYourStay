@@ -16,6 +16,7 @@ public class VerificacionControlador {
     }
 
 
+    /**
     public void verificar() {
         String codigo = txtCodigo.getText();
 
@@ -26,6 +27,7 @@ public class VerificacionControlador {
             controladorPincipal.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+     */
 
 }
 
