@@ -31,6 +31,7 @@ public class ClienteService{
         this.autenticacionService = new AutenticacionService();
     }
 
+
     /**
      * metodo para registrar el cliente
      * @param nombre
@@ -130,13 +131,13 @@ public class ClienteService{
      * @param puntuacion
      * @throws Exception
      */
-    public void agregarResena(String cedulaCliente, String idAlojamiento, String comentario, int puntuacion) throws Exception {
+    public void agregarResena(String cedulaCliente, String nombreAlojamiento, String comentario, int puntuacion) throws Exception {
         Cliente cliente = (Cliente) usuarioRepositorio.obtenerPorCedula(cedulaCliente);
         if (cliente == null) {
             throw new Exception("Cliente no encontrado");
         }
 
-        Alojamiento alojamiento = alojamientoRepositorio.obtenerPorId(idAlojamiento);
+        Alojamiento alojamiento = alojamientoRepositorio.obtenerPorId(nombreAlojamiento);
         if (alojamiento == null) {
             throw new Exception("Alojamiento no encontrado");
         }
@@ -148,7 +149,7 @@ public class ClienteService{
         List<Reserva> reservas = reservaRepositorio.listar();
         boolean hospedado = reservas.stream()
                 .anyMatch(r -> r.getCliente().getCedula().equals(cedulaCliente)
-                        && r.getAlojamiento().getId().equals(idAlojamiento)
+                        && r.getAlojamiento().getNombre().equals(nombreAlojamiento)
                         && r.getFechaFin().isBefore(LocalDate.now()));
 
         if (!hospedado) {

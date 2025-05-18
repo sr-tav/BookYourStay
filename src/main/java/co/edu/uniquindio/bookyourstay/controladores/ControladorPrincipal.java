@@ -1,10 +1,13 @@
 package co.edu.uniquindio.bookyourstay.controladores;
+import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.repositorios.*;
 import co.edu.uniquindio.bookyourstay.servicios.*;
 import javafx.scene.control.Alert;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class ControladorPrincipal {
 
     private static ControladorPrincipal instancia;
@@ -21,6 +24,7 @@ public class ControladorPrincipal {
     private final AdministradorService administradorService;
     private final ReservaService reservaService;
     private final AlojamientoService alojamientoService;
+    private Usuario usuarioActual;
 
     private ControladorPrincipal() {
         // Inicializar repositorios únicos

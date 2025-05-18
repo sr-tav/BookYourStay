@@ -28,22 +28,26 @@ public class LoginControlador {
 
     /**
      * metodo para iniciar sesion
-     * @param e
+     * @param
      */
-    public void iniciarSesion(ActionEvent e){
-        String id= txtIdentificacion.getText();
-        String contraseña= txtContrasena.getText();
+    public void iniciarSesion(ActionEvent event) {
 
-        Usuario usuarioEncontrado = controladorPrincipal.getUsuarioRepositorio().obtenerPorCedula(id);
+        try {
+            String identificacion = txtIdentificacion.getText().trim();
+            String contrasena = txtContrasena.getText().trim();
 
-
-        if(usuarioEncontrado != null){
-            controladorPrincipal.mostrarAlerta("Éxito, inicio de sesión exitoso", Alert.AlertType.INFORMATION);
+            Usuario usuario = controladorPrincipal.getAutenticacionService().iniciarSesion(identificacion, contrasena);
+            controladorPrincipal.setUsuarioActual(usuario);
 
             irPanelCliente();
+
+            controladorPrincipal.mostrarAlerta("Bienvenido " + usuario.getNombre(), Alert.AlertType.INFORMATION);
+
             cerrarVentana();
-        } else {
-            controladorPrincipal.mostrarAlerta("Error, numero de identificacion o contraseña incorrectos", Alert.AlertType.ERROR);
+
+        } catch (Exception e) {
+            controladorPrincipal.mostrarAlerta("Error: " + e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
         }
     }
 

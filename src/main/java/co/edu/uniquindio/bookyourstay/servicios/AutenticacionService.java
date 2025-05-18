@@ -20,6 +20,30 @@ public class AutenticacionService {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
+    /**
+     * metodo para iniciar sesion
+     * @param email
+     * @param contrasenia
+     * @return
+     * @throws Exception
+     */
+    public Usuario iniciarSesion(String cedula, String contrasenia) throws Exception {
+        Usuario usuario = usuarioRepositorio.obtenerPorCedula(cedula);
+
+        if (usuario == null) {
+            throw new Exception("Usuario no encontrado");
+        }
+
+        if (!usuario.getContrasenia().equals(contrasenia)) {
+            throw new Exception("Contraseña incorrecta");
+        }
+
+        if (!usuario.getEstadoCuenta()) {
+            throw new Exception("La cuenta no está activada. Verifica tu correo electrónico.");
+        }
+
+        return usuario;
+    }
 
     /**
      * metodo para activar la cuenta

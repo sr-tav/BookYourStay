@@ -21,14 +21,6 @@ public class ReservaRepositorio {
         reservas.remove(reserva);
     }
 
-    public Reserva obtenerPorId(String id) {
-        for (Reserva reserva : reservas) {
-            if (reserva.getId().equals(id)) {
-                return reserva;
-            }
-        }
-        return null;
-    }
 
     public List<Reserva> obtenerPorCliente(String cedulaCliente) {
         List<Reserva> resultado = new ArrayList<>();
