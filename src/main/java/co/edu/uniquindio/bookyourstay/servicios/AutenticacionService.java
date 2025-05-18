@@ -3,16 +3,19 @@ package co.edu.uniquindio.bookyourstay.servicios;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
 import co.edu.uniquindio.bookyourstay.util.EmailUtil;
+import lombok.AllArgsConstructor;
 
 import java.util.Random;
 import java.util.UUID;
 
+@AllArgsConstructor
 public class AutenticacionService {
 
     private final UsuarioRepositorio usuarioRepositorio;
 
-    public AutenticacionService(UsuarioRepositorio usuarioRepositorio) {
-        this.usuarioRepositorio = usuarioRepositorio;
+
+    public AutenticacionService(){
+        this.usuarioRepositorio = new UsuarioRepositorio();
     }
 
     /**
@@ -49,14 +52,6 @@ public class AutenticacionService {
      */
     public boolean activarCuenta(String email, String codigoIngresado) throws Exception {
         Usuario usuario = usuarioRepositorio.obtenerPorEmail(email);
-
-        if (usuario == null) {
-            throw new Exception("Usuario no encontrado");
-        }
-
-        if (usuario.getEstadoCuenta()) {
-            throw new Exception("La cuenta ya está activada");
-        }
 
         if (!usuario.getCodigoActivacion().equals(codigoIngresado)) {
             throw new Exception("El código de activación no es válido");

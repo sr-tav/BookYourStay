@@ -1,6 +1,6 @@
 package co.edu.uniquindio.bookyourstay.repositorios;
 
-import co.edu.uniquindio.bookyourstay.modelo.Alojamiento;
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 
 import java.util.ArrayList;
 import java.util.List;

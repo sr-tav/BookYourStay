@@ -1,6 +1,7 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
 import co.edu.uniquindio.bookyourstay.modelo.*;
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Apartamento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Casa;
 import co.edu.uniquindio.bookyourstay.repositorios.AlojamientoRepositorio;

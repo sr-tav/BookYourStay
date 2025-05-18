@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.modelo;
 
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

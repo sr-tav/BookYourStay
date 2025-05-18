@@ -11,14 +11,14 @@ public class EmailUtil {
     public static void enviarNotificacion(String destinatario, String asunto, String mensaje) {
 
         Email email = EmailBuilder.startingBlank()
-                .from("SU_EMAIL")
+                .from("pruebaproyectouq@gmail.com")
                 .to(destinatario)
                 .withSubject(asunto)
                 .withPlainText(mensaje)
                 .buildEmail();
 
         try (Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "SU_EMAIL", "SU_CLAVE")
+                .withSMTPServer("smtp.gmail.com", 587, "pruebaproyectouq@gmail.com", "mitg wxlp pbra izon")
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withDebugLogging(true)
                 .buildMailer()) {

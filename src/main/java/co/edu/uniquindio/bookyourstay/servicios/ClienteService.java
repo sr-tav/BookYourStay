@@ -1,17 +1,19 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
 import co.edu.uniquindio.bookyourstay.modelo.*;
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.repositorios.AlojamientoRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.ReseniaRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.ReservaRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
 import co.edu.uniquindio.bookyourstay.util.EmailUtil;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
-
+@AllArgsConstructor
 public class ClienteService{
 
     private final UsuarioRepositorio usuarioRepositorio;
@@ -20,12 +22,13 @@ public class ClienteService{
     private final ReseniaRepositorio reseniaRepositorio;
     private final ReservaRepositorio reservaRepositorio;
 
-    public ClienteService(UsuarioRepositorio usuarioRepositorio, AutenticacionService autenticacionService, AlojamientoRepositorio alojamientoRepositorio, ReseniaRepositorio reseniaRepositorio, ReservaRepositorio reservaRepositorio) {
-        this.usuarioRepositorio = usuarioRepositorio;
-        this.autenticacionService = autenticacionService;
-        this.alojamientoRepositorio = alojamientoRepositorio;
-        this.reseniaRepositorio = reseniaRepositorio;
-        this.reservaRepositorio = reservaRepositorio;
+
+    public ClienteService() {
+        this.usuarioRepositorio = new UsuarioRepositorio();
+        this.reseniaRepositorio = new ReseniaRepositorio();
+        this.alojamientoRepositorio = new AlojamientoRepositorio();
+        this.reservaRepositorio = new ReservaRepositorio();
+        this.autenticacionService = new AutenticacionService();
     }
 
     /**

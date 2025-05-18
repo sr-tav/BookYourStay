@@ -1,18 +1,18 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
-import co.edu.uniquindio.bookyourstay.modelo.Alojamiento;
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.repositorios.AlojamientoRepositorio;
+import lombok.AllArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
+@AllArgsConstructor
 public class AlojamientoService {
 
     private final AlojamientoRepositorio alojamientoRepositorio;
 
-    public AlojamientoService(AlojamientoRepositorio alojamientoRepositorio) {
-        this.alojamientoRepositorio = alojamientoRepositorio;
-    }
+
 
     /**
      * metodo que lista alojamientos
@@ -38,5 +38,11 @@ public class AlojamientoService {
      */
     public List<Alojamiento> buscarPorCiudad(String ciudad) {
         return alojamientoRepositorio.obtenerPorCiudad(ciudad);
+    }
+
+    public List<Alojamiento> obtenerAlojamientosAleatorios(int cantidad) {
+        List<Alojamiento> todos = listarTodos(); // ya existente
+        Collections.shuffle(todos);
+        return todos.subList(0, Math.min(cantidad, todos.size()));
     }
 }

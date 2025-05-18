@@ -6,6 +6,6 @@ module co.edu.uniquindio.bookyourstay {
     requires org.simplejavamail;
 
 
-    opens co.edu.uniquindio.bookyourstay to javafx.fxml;
+    opens co.edu.uniquindio.bookyourstay.controladores to javafx.fxml;
     exports co.edu.uniquindio.bookyourstay;
 }

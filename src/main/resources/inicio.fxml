@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="center"  fx:controller="co.edu.uniquindio.bookyourstay.controladores.InicioControlador" spacing="20" prefWidth="800" prefHeight="600">
+
+    <!-- Navegación -->
+    <HBox spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="0" left="10"/>
+        </padding>
+        <Button text="Iniciar Sesión" onAction="#irIniciarSesion" />
+        <Button text="Registrarse" onAction="#irRegistrarse"/>
+    </HBox>
+
+    <!-- Alojamientos aleatorios -->
+    <VBox spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="0" left="10"/>
+        </padding>
+        <Label text="Alojamientos destacados" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <ListView fx:id="listaAlojamientos" prefHeight="200"/>
+    </VBox>
+
+    <!-- Búsqueda -->
+    <HBox spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="0" left="10"/>
+        </padding>
+        <TextField fx:id="campoBusqueda" promptText="Buscar ciudad, tipo o nombre"/>
+        <Button text="Buscar" />
+    </HBox>
+
+    <!-- Ofertas -->
+    <VBox spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <Label text="Ofertas especiales" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+        <ListView fx:id="listaOfertas" prefHeight="100"/>
+    </VBox>
+
+</VBox>

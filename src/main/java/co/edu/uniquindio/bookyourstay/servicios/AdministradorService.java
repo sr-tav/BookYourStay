@@ -1,31 +1,38 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.modelo.EstadisticaAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.Oferta;
-import co.edu.uniquindio.bookyourstay.modelo.Alojamiento;
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.Reserva;
 import co.edu.uniquindio.bookyourstay.modelo.factory.AlojamientoFactory;
 import co.edu.uniquindio.bookyourstay.repositorios.AlojamientoRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.OfertaRepositorio;
 import co.edu.uniquindio.bookyourstay.repositorios.ReservaRepositorio;
+import javafx.scene.image.Image;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 public class AdministradorService {
 
     private final AlojamientoRepositorio alojamientoRepositorio;
     private final OfertaRepositorio ofertaRepositorio;
     private final ReservaRepositorio reservaRepositorio;
 
-    public AdministradorService(AlojamientoRepositorio alojamientoRepositorio, OfertaRepositorio ofertaRepositorio, ReservaRepositorio reservaRepositorio) {
-        this.alojamientoRepositorio = alojamientoRepositorio;
-        this.ofertaRepositorio = ofertaRepositorio;
-        this.reservaRepositorio = reservaRepositorio;
+    public AdministradorService(){
+        this.alojamientoRepositorio = new AlojamientoRepositorio();
+        this.reservaRepositorio = new ReservaRepositorio();
+        this.ofertaRepositorio = new OfertaRepositorio();
     }
+
 
     /**
      * metodo para agregar un alojamiento
@@ -39,7 +46,7 @@ public class AdministradorService {
      * @throws Exception
      */
     public void registrarAlojamiento(String tipo, String id, String nombre, String ciudad,
-                                     String descripcion, float precioNoche, byte capacidadMaxima) throws Exception {
+                                     String descripcion, float precioNoche, byte capacidadMaxima, Image imagenAlojamiento, List<String> servicios) throws Exception {
 
         String mensajesValidacion = "";
 
@@ -76,7 +83,7 @@ public class AdministradorService {
         }
 
         Alojamiento alojamiento = AlojamientoFactory.crearAlojamiento(
-                tipo, id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima
+                tipo, id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios
         );
 
         alojamientoRepositorio.agregar(alojamiento);
@@ -176,6 +183,41 @@ public class AdministradorService {
      */
     public List<Alojamiento> listarAlojamientos() {
         return alojamientoRepositorio.listar();
+    }
+
+    /**
+     * metodo que calcula estadisticas
+     * @return
+     */
+    public List<EstadisticaAlojamiento> obtenerEstadisticasPorAlojamiento() {
+        List<Reserva> reservas = reservaRepositorio.listar();
+        List<Alojamiento> alojamientos = alojamientoRepositorio.listar();
+        List<EstadisticaAlojamiento> estadisticas = new ArrayList<>();
+
+        for (Alojamiento alojamiento : alojamientos) {
+            List<Reserva> reservasDelAlojamiento = reservas.stream()
+                    .filter(r -> r.getAlojamiento().getId().equals(alojamiento.getId()))
+                    .toList();
+
+            double diasReservados = reservasDelAlojamiento.stream()
+                    .mapToLong(r -> ChronoUnit.DAYS.between(r.getFechaInicio(), r.getFechaFin()))
+                    .sum();
+
+            double totalDias = ChronoUnit.DAYS.between(LocalDate.now().minusMonths(6), LocalDate.now());
+            double porcentajeOcupacion = totalDias > 0 ? (diasReservados / totalDias) * 100 : 0;
+
+            double ingresos = reservasDelAlojamiento.stream()
+                    .mapToDouble(r -> r.getFactura() != null ? r.getFactura().getTotal() : 0)
+                    .sum();
+
+            estadisticas.add(new EstadisticaAlojamiento(
+                    alojamiento.getId(),
+                    porcentajeOcupacion,
+                    ingresos
+            ));
+        }
+
+        return estadisticas;
     }
 
 }
