@@ -3,12 +3,10 @@ package co.edu.uniquindio.bookyourstay.servicios;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
 import co.edu.uniquindio.bookyourstay.util.EmailUtil;
-import lombok.AllArgsConstructor;
 
 import java.util.Random;
 import java.util.UUID;
 
-@AllArgsConstructor
 public class AutenticacionService {
 
     private final UsuarioRepositorio usuarioRepositorio;

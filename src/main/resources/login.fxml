@@ -16,13 +16,15 @@
     </Label>
 
     <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
-        <Label text="Número de identificación:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="txtIdentificacion" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="30.0" />
+        <Label text="Correo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="30.0" />
 
         <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <PasswordField fx:id="txtContrasena" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="30.0" />
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="30.0" />
     </GridPane>
 
-    <Button text="Iniciar Sesion"  minHeight="40.0" minWidth="130.0" style="-fx-background-color: #00807a; -fx-text-fill: white" />
+    <Label fx:id="errorText" textFill="#eb5454" />
+
+    <Button onAction="#onLoginClick"  text="Iniciar Sesion"  minHeight="40.0" minWidth="130.0" style="-fx-background-color: #00807a; -fx-text-fill: white" />
 
 </VBox>

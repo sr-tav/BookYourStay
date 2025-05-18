@@ -21,7 +21,7 @@ public class VerificacionControlador {
         String codigo = txtCodigo.getText();
 
         try {
-            controladorPincipal.getAutenticacionService().activarCuenta(cedulaCliente, codigo);
+            controladorPincipal.getAutenticacionService().activarCuenta("cedulaCliente", codigo);
             controladorPincipal.mostrarAlerta("Cuenta activada correctamente", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
             controladorPincipal.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
