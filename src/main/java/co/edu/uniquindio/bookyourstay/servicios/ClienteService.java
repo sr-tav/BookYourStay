@@ -40,7 +40,7 @@ public class ClienteService{
      * @param contrasenia
      * @throws Exception
      */
-    public void registrarCliente(String nombre, String cedula, String telefono, String email, String contrasenia) throws Exception {
+    public Cliente registrarCliente(String nombre, String cedula, String telefono, String email, String contrasenia) throws Exception {
 
         String mensajesValidacion = "";
 
@@ -90,6 +90,8 @@ public class ClienteService{
 
         String mensaje = "Hola " + nombre + ",\n\nTu código de activación es: " + codigo;
         EmailUtil.enviarNotificacion(cliente.getEmail(), "Código de activación - BookYourStay", mensaje);
+
+        return cliente;
     }
 
     /**

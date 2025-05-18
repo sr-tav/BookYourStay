@@ -1,25 +1,41 @@
 package co.edu.uniquindio.bookyourstay.controladores;
-
-import co.edu.uniquindio.bookyourstay.servicios.AdministradorService;
-import co.edu.uniquindio.bookyourstay.servicios.AutenticacionService;
-import co.edu.uniquindio.bookyourstay.servicios.ClienteService;
+import co.edu.uniquindio.bookyourstay.repositorios.*;
+import co.edu.uniquindio.bookyourstay.servicios.*;
 import javafx.scene.control.Alert;
 import lombok.Getter;
 
+@Getter
 public class ControladorPrincipal {
 
     private static ControladorPrincipal instancia;
-    @Getter
+
+    private final UsuarioRepositorio usuarioRepositorio;
+    private final AlojamientoRepositorio alojamientoRepositorio;
+    private final ReservaRepositorio reservaRepositorio;
+    private final ReseniaRepositorio resenaRepositorio;
+    private final OfertaRepositorio ofertaRepositorio;
+
+    // Servicios compartidos
     private final ClienteService clienteService;
-    @Getter
-    private final AdministradorService administradorService;
-    @Getter
     private final AutenticacionService autenticacionService;
+    private final AdministradorService administradorService;
+    private final ReservaService reservaService;
+    private final AlojamientoService alojamientoService;
 
     private ControladorPrincipal() {
-        this.clienteService = new ClienteService();
-        this.administradorService = new AdministradorService();
-        this.autenticacionService = new AutenticacionService();
+        // Inicializar repositorios únicos
+        this.usuarioRepositorio = new UsuarioRepositorio();
+        this.alojamientoRepositorio = new AlojamientoRepositorio();
+        this.reservaRepositorio = new ReservaRepositorio();
+        this.resenaRepositorio = new ReseniaRepositorio();
+        this.ofertaRepositorio = new OfertaRepositorio();
+
+        // Inicializar servicios, pasando los mismos repositorios
+        this.autenticacionService = new AutenticacionService(usuarioRepositorio);
+        this.clienteService = new ClienteService(usuarioRepositorio, autenticacionService, alojamientoRepositorio, resenaRepositorio, reservaRepositorio);
+        this.administradorService = new AdministradorService(alojamientoRepositorio, ofertaRepositorio, reservaRepositorio);
+        this.reservaService = new ReservaService(reservaRepositorio, usuarioRepositorio);
+        this.alojamientoService = new AlojamientoService(alojamientoRepositorio);
     }
 
     public static ControladorPrincipal getInstancia() {

@@ -12,8 +12,6 @@ public class AlojamientoService {
 
     private final AlojamientoRepositorio alojamientoRepositorio;
 
-
-
     /**
      * metodo que lista alojamientos
      * @return

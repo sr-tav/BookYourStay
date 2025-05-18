@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
+import co.edu.uniquindio.bookyourstay.modelo.Cliente;
 import co.edu.uniquindio.bookyourstay.servicios.ClienteService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,8 +41,11 @@ public class RegistroControlador {
             String correo = txtCorreo.getText();
             String contrasenia = txtPassword.getText();
 
-            irVerificacion();
-            controladorPrincipal.getClienteService().registrarCliente(nombre, cedula, telefono, correo, contrasenia);
+
+            Cliente cliente = controladorPrincipal.getClienteService().registrarCliente(nombre, cedula, telefono, correo, contrasenia);
+            irVerificacion(cliente);
+            cerrarVentana();
+
         }catch (Exception e){
             controladorPrincipal.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -55,32 +59,32 @@ public class RegistroControlador {
         txtPassword.setText("");
     }
 
-    public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
+    public void navegarVentana(String nombreArchivoFxml, String tituloVentana, Cliente cliente) {
         try {
-
-            // Cargar la vista
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
             Parent root = loader.load();
 
-            // Crear la escena
-            Scene scene = new Scene(root);
+            VerificacionControlador controller = loader.getController();
+            controller.initDatos(cliente);
 
-            // Crear un nuevo escenario (ventana)
             Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setScene(new Scene(root));
             stage.setTitle(tituloVentana);
-
-            // Mostrar la nueva ventana
+            stage.setResizable(false);
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void irVerificacion() {
-        navegarVentana("/verificacion.fxml", "BookYourStay - Iniciar Sesión");
+    public void irVerificacion(Cliente cliente) {
+        navegarVentana("/verificacion.fxml", "BookYourStay - Iniciar Sesión", cliente);
+    }
+
+    public void cerrarVentana(){
+        Stage stage = (Stage) txtNombre.getScene().getWindow();
+        stage.close();
     }
 
 

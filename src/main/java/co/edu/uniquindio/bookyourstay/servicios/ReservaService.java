@@ -24,14 +24,10 @@ public class ReservaService {
 
     private final ReservaRepositorio reservaRepositorio;
     private final UsuarioRepositorio usuarioRepositorio;
-    private final AlojamientoRepositorio alojamientoRepositorio;
-    private final ReseniaRepositorio reseniaRepositorio;
 
-    public ReservaService(ReservaRepositorio reservaRepositorio, UsuarioRepositorio usuarioRepositorio, AlojamientoRepositorio alojamientoRepositorio, ReseniaRepositorio reseniaRepositorio) {
+    public ReservaService(ReservaRepositorio reservaRepositorio, UsuarioRepositorio usuarioRepositorio) {
         this.reservaRepositorio = reservaRepositorio;
         this.usuarioRepositorio = usuarioRepositorio;
-        this.alojamientoRepositorio = alojamientoRepositorio;
-        this.reseniaRepositorio = reseniaRepositorio;
     }
 
     /**

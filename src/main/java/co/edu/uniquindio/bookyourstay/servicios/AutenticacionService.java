@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.modelo.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
 import co.edu.uniquindio.bookyourstay.util.EmailUtil;
@@ -19,47 +20,22 @@ public class AutenticacionService {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-    /**
-     * metodo para iniciar sesion
-     * @param email
-     * @param contrasenia
-     * @return
-     * @throws Exception
-     */
-    public Usuario iniciarSesion(String email, String contrasenia) throws Exception {
-        Usuario usuario = usuarioRepositorio.obtenerPorEmail(email);
-
-        if (usuario == null) {
-            throw new Exception("Usuario no encontrado");
-        }
-
-        if (!usuario.getContrasenia().equals(contrasenia)) {
-            throw new Exception("Contraseña incorrecta");
-        }
-
-        if (!usuario.getEstadoCuenta()) {
-            throw new Exception("La cuenta no está activada. Verifica tu correo electrónico.");
-        }
-
-        return usuario;
-    }
 
     /**
      * metodo para activar la cuenta
-     * @param email
      * @param codigoIngresado
      * @return
      * @throws Exception
      */
-    public boolean activarCuenta(String email, String codigoIngresado) throws Exception {
-        Usuario usuario = usuarioRepositorio.obtenerPorEmail(email);
+    public boolean activarCuenta(String cedula, String codigoIngresado) throws Exception {
+        Cliente cliente = (Cliente) usuarioRepositorio.obtenerPorCedula(cedula);
 
-        if (!usuario.getCodigoActivacion().equals(codigoIngresado)) {
+        if (!cliente.getCodigoActivacion().equals(codigoIngresado)) {
             throw new Exception("El código de activación no es válido");
         }
 
-        usuario.setEstadoCuenta(true);
-        usuario.setCodigoActivacion(null);
+        cliente.setEstadoCuenta(true);
+        cliente.setCodigoActivacion(null);
         return true;
     }
 
