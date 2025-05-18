@@ -13,9 +13,12 @@ public class AutenticacionService {
 
     private final UsuarioRepositorio usuarioRepositorio;
 
-
-    public AutenticacionService(){
+    public AutenticacionService() {
         this.usuarioRepositorio = new UsuarioRepositorio();
+    }
+
+    public AutenticacionService(UsuarioRepositorio usuarioRepositorio) {
+        this.usuarioRepositorio = usuarioRepositorio;
     }
 
     /**
