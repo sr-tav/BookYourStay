@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Font?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="co.edu.uniquindio.bookyourstay.controladores.AlojamientosRentablesControlador"
-      prefHeight="400.0" prefWidth="600.0">
+      prefHeight="500.0" prefWidth="750.0"
+      spacing="20.0" alignment="TOP_CENTER"
+      style="-fx-background-color: linear-gradient(to bottom, #fffbe6, #f1f8e9);
+             -fx-padding: 30;
+             -fx-background-radius: 15;">
 
-    <Label text="Alojamientos mas rentables" textFill="#0f0f0f">
-        <font>
-            <Font size="20.0"/>
-        </font>
-    </Label>
+    <Label text="💰 Alojamientos Más Rentables"
+           style="-fx-text-fill: #33691e;
+                  -fx-font-size: 26px;
+                  -fx-font-weight: bold;
+                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.3, 1, 1);"/>
 
-
-    <TableView fx:id="tablaAlojamientosPopulares" VBox.vgrow="ALWAYS" >
+    <TableView fx:id="tablaAlojamientosPopulares"
+               VBox.vgrow="ALWAYS"
+               style="-fx-background-radius: 10;
+                      -fx-border-radius: 10;
+                      -fx-border-color: #8bc34a;
+                      -fx-border-width: 2;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
+                      -fx-table-cell-border-color: transparent;
+                      -fx-control-inner-background: #ffffff;">
         <columns>
-            <TableColumn fx:id="id" text="Id" />
-            <TableColumn fx:id="nombre" text="nombre" />
-            <TableColumn fx:id="ciudad" text="ciudad"  />
-            <TableColumn fx:id="descripcion" text="descripcion" />
-            <TableColumn fx:id="precio" text="precio/noche" />
-            <TableColumn fx:id="huespedes" text="numero de huespedes" />
+            <TableColumn fx:id="id" text="ID" />
+            <TableColumn fx:id="nombre" text="Nombre" />
+            <TableColumn fx:id="ciudad" text="Ciudad" />
+            <TableColumn fx:id="descripcion" text="Descripción" />
+            <TableColumn fx:id="precio" text="Precio/Noche" />
+            <TableColumn fx:id="huespedes" text="Huéspedes" />
         </columns>
         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
         </columnResizePolicy>
     </TableView>
 

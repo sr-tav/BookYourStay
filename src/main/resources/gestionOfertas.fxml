@@ -5,41 +5,61 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.bookyourstay.controladores.GestionOfertasControlador"
-            spacing="15"
-            style="-fx-padding: 20; -fx-background-color: #f5f5f5;">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="co.edu.uniquindio.bookyourstay.controladores.GestionOfertasControlador"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: linear-gradient(to bottom, #ffffff, #e3f2fd); -fx-background-radius: 10;">
+
+    <Label text="💸 Gestión de Ofertas"
+           style="-fx-font-size: 26px; -fx-text-fill: #1565c0;
+                  -fx-font-weight: bold;
+                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 3, 0.3, 1, 1);"/>
 
     <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 15 0;">
-        <Button text="Nueva oferta"
-                style="-fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
+        <Button text="Nueva Oferta"
+                style="-fx-font-weight: bold;
+                       -fx-background-color: #4CAF50;
+                       -fx-text-fill: white;
+                       -fx-background-radius: 8;"
                 minWidth="150" minHeight="35"/>
 
         <Button text="Editar"
-                style="-fx-font-weight: bold; -fx-background-color: #2196F3; -fx-text-fill: white;"
+                style="-fx-font-weight: bold;
+                       -fx-background-color: #2196F3;
+                       -fx-text-fill: white;
+                       -fx-background-radius: 8;"
                 minWidth="100" minHeight="35" disable="true"
                 fx:id="btnEditar"/>
 
         <Button text="Eliminar"
-                style="-fx-font-weight: bold; -fx-background-color: #f44336; -fx-text-fill: white;"
+                style="-fx-font-weight: bold;
+                       -fx-background-color: #f44336;
+                       -fx-text-fill: white;
+                       -fx-background-radius: 8;"
                 minWidth="100" minHeight="35" disable="true"
                 fx:id="btnEliminar"/>
-
     </HBox>
 
-    <TableView fx:id="tablaOfertas" layoutX="430.0" layoutY="30.0"
-               prefHeight="380.0" prefWidth="490.0">
+    <TableView fx:id="tablaOfertas"
+               prefHeight="380.0" prefWidth="700.0"
+               style="-fx-border-color: #90caf9;
+                      -fx-border-width: 2;
+                      -fx-background-radius: 10;
+                      -fx-border-radius: 10;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
+                      -fx-control-inner-background: #ffffff;">
         <columns>
-            <TableColumn fx:id="colId" text="Id" prefWidth="${tablaOfertas.width*0.2}" />
-            <TableColumn fx:id="colAlojamiento" text="Alojamiento" prefWidth="${tablaOfertas.width*0.2}" />
-            <TableColumn fx:id="colInicio" text="Inicio" prefWidth="${tablaOfertas.width*0.2}" />
-            <TableColumn fx:id="colFin" text="Fin" prefWidth="${tablaOfertas.width*0.2}" />
-            <TableColumn fx:id="colPorcentaje" text="Porcentaje" prefWidth="${tablaOfertas.width*0.2}" />
+            <TableColumn fx:id="colId" text="ID" />
+            <TableColumn fx:id="colAlojamiento" text="Alojamiento" />
+            <TableColumn fx:id="colInicio" text="Inicio" />
+            <TableColumn fx:id="colFin" text="Fin" />
+            <TableColumn fx:id="colPorcentaje" text="Descuento (%)" />
         </columns>
         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
         </columnResizePolicy>
     </TableView>
 

@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="center"  fx:controller="co.edu.uniquindio.bookyourstay.controladores.InicioControlador" spacing="20" prefWidth="800" prefHeight="600">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="co.edu.uniquindio.bookyourstay.controladores.InicioControlador"
+      alignment="CENTER"
+      spacing="20"
+      prefWidth="800"
+      prefHeight="600"
+      style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e3f2fd); -fx-padding: 30;">
 
     <!-- Navegación -->
-    <HBox spacing="10">
+    <HBox spacing="15" alignment="CENTER">
         <padding>
             <Insets top="10" right="10" bottom="0" left="10"/>
         </padding>
-        <Button text="Iniciar Sesión" onAction="#irIniciarSesion" />
-        <Button text="Registrarse" onAction="#irRegistrarse"/>
+        <Button text="Iniciar Sesión"
+                onAction="#irIniciarSesion"
+                style="-fx-background-color: #42a5f5; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"
+                minWidth="130" minHeight="35"/>
+        <Button text="Registrarse"
+                onAction="#irRegistrarse"
+                style="-fx-background-color: #66bb6a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"
+                minWidth="130" minHeight="35"/>
     </HBox>
 
-    <!-- Alojamientos aleatorios -->
-    <VBox spacing="10">
-        <padding>
-            <Insets top="10" right="10" bottom="0" left="10"/>
-        </padding>
-        <Label text="Alojamientos destacados" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <!-- Alojamientos destacados -->
+    <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-border-color: #bbdefb; -fx-border-width: 2; -fx-background-radius: 10; -fx-padding: 15;">
+        <Label text="🏡 Alojamientos destacados"
+               style="-fx-font-size: 18px; -fx-text-fill: #1e88e5; -fx-font-weight: bold;"/>
         <ListView fx:id="listaAlojamientos" prefHeight="200"/>
     </VBox>
 
     <!-- Búsqueda -->
-    <HBox spacing="10">
-        <padding>
-            <Insets top="10" right="10" bottom="0" left="10"/>
-        </padding>
-        <TextField fx:id="campoBusqueda" promptText="Buscar ciudad, tipo o nombre"/>
-        <Button text="Buscar" />
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="campoBusqueda"
+                   promptText="Buscar ciudad, tipo o nombre"
+                   style="-fx-prompt-text-fill: #888; -fx-background-radius: 8;"
+                   minWidth="400" minHeight="35"/>
+        <Button text="Buscar"
+                style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"
+                minWidth="100" minHeight="35"/>
     </HBox>
 
-    <!-- Ofertas -->
-    <VBox spacing="10">
-        <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
-        </padding>
-        <Label text="Ofertas especiales" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+    <!-- Ofertas especiales -->
+    <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-border-color: #ffe082; -fx-border-width: 2; -fx-background-radius: 10; -fx-padding: 15;">
+        <Label text="🔥 Ofertas especiales"
+               style="-fx-font-size: 16px; -fx-text-fill: #ef6c00; -fx-font-weight: bold;"/>
         <ListView fx:id="listaOfertas" prefHeight="100"/>
     </VBox>
 
