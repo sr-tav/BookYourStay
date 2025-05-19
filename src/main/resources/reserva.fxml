@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="531.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.ReservaControlador">
+
+    <top>
+        <VBox prefHeight="82.0" prefWidth="394.0" spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Buscar Alojamiento por Ciudad" />
+            <HBox spacing="10">
+                <TextField fx:id="ciudadTextField" promptText="Ingrese una ciudad..." HBox.hgrow="ALWAYS" />
+                <Button text="Buscar" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
+            <!-- Lista de alojamientos -->
+            <VBox spacing="10.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <Label text="Resultados de búsqueda" />
+                <ListView fx:id="listaAlojamientos" prefWidth="250" />
+            </VBox>
+
+            <!-- Formulario de reserva -->
+            <VBox prefHeight="447.0" prefWidth="177.0" spacing="10.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Datos de la Reserva" />
+
+                <Label text="Fecha de entrada:" />
+                <DatePicker fx:id="fechaEntradaPicker" />
+
+                <Label text="Fecha de salida:" />
+                <DatePicker fx:id="fechaSalidaPicker" />
+
+                <Label text="Número de huéspedes:" />
+                <Spinner fx:id="spinnerHuespedes" editable="true">
+                    <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="1" max="20" min="1" />
+                    </valueFactory>
+                </Spinner>
+
+                <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Confirmar Reserva" />
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

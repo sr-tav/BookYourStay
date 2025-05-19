@@ -126,7 +126,6 @@ public class ClienteService{
     /**
      * metodo que agrega una reseña
      * @param cedulaCliente
-     * @param idAlojamiento
      * @param comentario
      * @param puntuacion
      * @throws Exception
