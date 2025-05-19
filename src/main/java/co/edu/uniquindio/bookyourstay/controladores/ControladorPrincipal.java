@@ -1,4 +1,5 @@
 package co.edu.uniquindio.bookyourstay.controladores;
+import co.edu.uniquindio.bookyourstay.modelo.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.repositorios.*;
 import co.edu.uniquindio.bookyourstay.servicios.*;
@@ -24,7 +25,11 @@ public class ControladorPrincipal {
     private final AdministradorService administradorService;
     private final ReservaService reservaService;
     private final AlojamientoService alojamientoService;
+
     private Usuario usuarioActual;
+    private final Administrador administrador;
+
+
 
     private ControladorPrincipal() {
         // Inicializar repositorios únicos
@@ -33,6 +38,8 @@ public class ControladorPrincipal {
         this.reservaRepositorio = new ReservaRepositorio();
         this.resenaRepositorio = new ReseniaRepositorio();
         this.ofertaRepositorio = new OfertaRepositorio();
+
+        this.administrador = new Administrador();
 
         // Inicializar servicios, pasando los mismos repositorios
         this.autenticacionService = new AutenticacionService(usuarioRepositorio);

@@ -16,6 +16,7 @@ public class AutenticacionService {
         this.usuarioRepositorio = new UsuarioRepositorio();
     }
 
+
     public AutenticacionService(UsuarioRepositorio usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
     }
@@ -27,8 +28,8 @@ public class AutenticacionService {
      * @return
      * @throws Exception
      */
-    public Usuario iniciarSesion(String cedula, String contrasenia) throws Exception {
-        Usuario usuario = usuarioRepositorio.obtenerPorCedula(cedula);
+    public Usuario iniciarSesion(String email, String contrasenia ) throws Exception {
+        Usuario usuario = usuarioRepositorio.obtenerPorEmail(email);
 
         if (usuario == null) {
             throw new Exception("Usuario no encontrado");
@@ -136,4 +137,6 @@ public class AutenticacionService {
         return codigoFormateado;
 
     }
+
+
  }

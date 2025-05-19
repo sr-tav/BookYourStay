@@ -16,8 +16,8 @@
     </Label>
 
     <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
-        <Label text="identificacion" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="txtIdentificacion" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="30.0" />
+        <Label text="Correo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="30.0" />
 
         <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <PasswordField fx:id="txtContrasena" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="30.0" />

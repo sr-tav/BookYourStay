@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
+import co.edu.uniquindio.bookyourstay.modelo.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.servicios.AutenticacionService;
 import javafx.event.ActionEvent;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 public class LoginControlador {
     @FXML
-    private TextField txtIdentificacion;
+    private TextField txtEmail;
 
     @FXML
     private PasswordField txtContrasena;
@@ -33,10 +34,10 @@ public class LoginControlador {
     public void iniciarSesion(ActionEvent event) {
 
         try {
-            String identificacion = txtIdentificacion.getText().trim();
+            String email = txtEmail.getText().trim();
             String contrasena = txtContrasena.getText().trim();
 
-            Usuario usuario = controladorPrincipal.getAutenticacionService().iniciarSesion(identificacion, contrasena);
+            Usuario usuario = controladorPrincipal.getAutenticacionService().iniciarSesion(email, contrasena);
             controladorPrincipal.setUsuarioActual(usuario);
 
             irPanelCliente();
@@ -44,6 +45,7 @@ public class LoginControlador {
             controladorPrincipal.mostrarAlerta("Bienvenido " + usuario.getNombre(), Alert.AlertType.INFORMATION);
 
             cerrarVentana();
+
 
         } catch (Exception e) {
             controladorPrincipal.mostrarAlerta("Error: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -95,7 +97,7 @@ public class LoginControlador {
      * metodo para cerrar la ventana
      */
     public void cerrarVentana(){
-        Stage stage = (Stage) txtIdentificacion.getScene().getWindow();
+        Stage stage = (Stage) txtEmail.getScene().getWindow();
         stage.close();
     }
 
