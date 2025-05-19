@@ -43,6 +43,7 @@
                 fx:id="btnEliminar"/>
     </HBox>
 
+
     <TableView fx:id="tablaOfertas"
                prefHeight="380.0" prefWidth="700.0"
                style="-fx-border-color: #90caf9;

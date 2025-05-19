@@ -59,6 +59,7 @@
                 minWidth="80" minHeight="35"/>
     </HBox>
 
+
     <TableView fx:id="tablaAlojamientos"
                prefHeight="380.0" prefWidth="700.0"
                style="-fx-border-color: #80cbc4;

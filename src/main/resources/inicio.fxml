@@ -33,6 +33,7 @@
         <ListView fx:id="listaAlojamientos" prefHeight="200"/>
     </VBox>
 
+
     <!-- Búsqueda -->
     <HBox spacing="10" alignment="CENTER">
         <TextField fx:id="campoBusqueda"
