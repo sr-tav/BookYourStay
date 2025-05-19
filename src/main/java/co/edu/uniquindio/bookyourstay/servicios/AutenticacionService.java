@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.modelo.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
@@ -28,7 +29,14 @@ public class AutenticacionService {
      * @return
      * @throws Exception
      */
-    public Usuario iniciarSesion(String email, String contrasenia ) throws Exception {
+    public Usuario iniciarSesion(String email, String contrasenia) throws Exception {
+        // Verificar si el usuario es el admin con datos hardcoded
+        if ("admin@bookyourstay.com".equals(email) && "admin123".equals(contrasenia)) {
+            // Crear y devolver el usuario administrador directamente
+            return new Administrador("Administrador", "12345678", "000000000", email, contrasenia, null, null, true);
+        }
+
+        // Si no es el admin, intentar obtenerlo desde el repositorio
         Usuario usuario = usuarioRepositorio.obtenerPorEmail(email);
 
         if (usuario == null) {
@@ -136,6 +144,24 @@ public class AutenticacionService {
 
         return codigoFormateado;
 
+    }
+
+    private static final Usuario ADMIN = new Administrador(
+            "Administrador",
+            "12345678",
+            "000000000",
+            "admin@bookyourstay.com",
+            "admin123",
+            null,
+            null,
+            true
+    );
+
+    public Usuario autenticar(String correo, String contrasena) {
+        if (ADMIN.getEmail().equals(correo) && ADMIN.getContrasenia().equals(contrasena)) {
+            return ADMIN;
+        }
+        return null;
     }
 
 

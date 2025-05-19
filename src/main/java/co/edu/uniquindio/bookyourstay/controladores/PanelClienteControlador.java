@@ -40,9 +40,10 @@ public class PanelClienteControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
-            cargarTab(tab1, "/recarga.fxml");
+            cargarTab(tab1, "/reserva.fxml");
             cargarTab(tab2, "/misReservas.fxml");
             cargarTab(tab3, "/miCuenta.fxml");
+            cargarTab(tab4, "/recarga.fxml");
             //Agregar los otros tabs…
         } catch (Exception e) {
             e.printStackTrace();

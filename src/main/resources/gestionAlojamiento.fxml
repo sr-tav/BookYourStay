@@ -45,7 +45,7 @@
             <TableColumn fx:id="colCiudad" text="Ciudad" prefWidth="${tablaAlojamientos.width*0.2}" />
             <TableColumn fx:id="colDescripcion" text="Descripcion" prefWidth="${tablaAlojamientos.width*0.2}" />
             <TableColumn fx:id="colpreioPorNoche" text="Precio" prefWidth="${tablaAlojamientos.width*0.2}" />
-        </ columns >
+        </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>

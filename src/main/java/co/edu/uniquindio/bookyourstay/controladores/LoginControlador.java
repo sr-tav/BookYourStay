@@ -32,7 +32,6 @@ public class LoginControlador {
      * @param
      */
     public void iniciarSesion(ActionEvent event) {
-
         try {
             String email = txtEmail.getText().trim();
             String contrasena = txtContrasena.getText().trim();
@@ -40,16 +39,19 @@ public class LoginControlador {
             Usuario usuario = controladorPrincipal.getAutenticacionService().iniciarSesion(email, contrasena);
             controladorPrincipal.setUsuarioActual(usuario);
 
-            irPanelCliente();
+            if (usuario instanceof Administrador) {
+                irPanelAdmin();
+            } else {
+                irPanelCliente();
+            }
 
             controladorPrincipal.mostrarAlerta("Bienvenido " + usuario.getNombre(), Alert.AlertType.INFORMATION);
 
             cerrarVentana();
 
-
         } catch (Exception e) {
             controladorPrincipal.mostrarAlerta("Error: " + e.getMessage(), Alert.AlertType.ERROR);
-            e.printStackTrace();
+            e.printStackTrace();  // Esto imprimirá la pila completa de la excepción
         }
     }
 
@@ -61,6 +63,12 @@ public class LoginControlador {
         navegarVentana("/panelCliente.fxml", "Banco - Panel Cliente");
 
     }
+
+    public void irPanelAdmin() {
+        navegarVentana("/panelAdministrador.fxml", "Banco - Panel Cliente");
+
+    }
+
 
     /**
      * metodo para navegar entre ventanas
@@ -74,8 +82,6 @@ public class LoginControlador {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreArchivoFxml));
             Parent root = loader.load();
 
-            PanelClienteControlador controlador = loader.getController();
-
             // Crear la escena
             Scene scene = new Scene(root);
 
@@ -88,7 +94,7 @@ public class LoginControlador {
             // Mostrar la nueva ventana
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

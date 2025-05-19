@@ -27,9 +27,6 @@ public class ControladorPrincipal {
     private final AlojamientoService alojamientoService;
 
     private Usuario usuarioActual;
-    private final Administrador administrador;
-
-
 
     private ControladorPrincipal() {
         // Inicializar repositorios únicos
@@ -39,7 +36,6 @@ public class ControladorPrincipal {
         this.resenaRepositorio = new ReseniaRepositorio();
         this.ofertaRepositorio = new OfertaRepositorio();
 
-        this.administrador = new Administrador();
 
         // Inicializar servicios, pasando los mismos repositorios
         this.autenticacionService = new AutenticacionService(usuarioRepositorio);

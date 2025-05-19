@@ -14,11 +14,13 @@ public class VerificacionControlador {
 
     private final ControladorPrincipal controladorPincipal;
 
+
     private Cliente cliente;
 
     public void initDatos(Cliente cliente) {
         this.cliente = cliente;
     }
+
 
     public VerificacionControlador() {
         this.controladorPincipal = ControladorPrincipal.getInstancia();
