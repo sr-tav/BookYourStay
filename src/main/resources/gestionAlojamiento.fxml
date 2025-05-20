@@ -18,7 +18,7 @@
                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 3, 0.3, 1, 1);"/>
 
     <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 15 0;">
-        <Button text="Nuevo Alojamiento"
+        <Button text="Nuevo Alojamiento" onAction="#irCrearNuevoAlojamiento"
                 style="-fx-font-weight: bold;
                        -fx-background-color: #4CAF50;
                        -fx-text-fill: white;

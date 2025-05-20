@@ -8,12 +8,13 @@
       xmlns:fx="http://javafx.com/fxml"
       spacing="30.0"
       style="-fx-padding: 30; -fx-background-color: linear-gradient(to bottom, #ecf0f1, #ffffff);"
-      fx:controller="co.edu.uniquindio.bookyourstay.controladores.PanelAdministradorControlador"
+      fx:controller="co.edu.uniquindio.bookyourstay.controladores.PanelClienteControlador"
       prefHeight="600.0" prefWidth="900.0">
 
     <!-- Encabezado -->
-    <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: #2c3e50; -fx-padding: 15; -fx-background-radius: 10;">
-        <Label text="🛠 Panel del Administrador"
+    <HBox alignment="CENTER_LEFT" spacing="15.0"
+          style="-fx-background-color: #34495e; -fx-padding: 15; -fx-background-radius: 10;">
+        <Label text="👤 Panel del Cliente"
                style="-fx-text-fill: white;">
             <font>
                 <Font size="22.0"/>
@@ -23,16 +24,15 @@
 
     <!-- Panel de pestañas -->
     <TabPane VBox.vgrow="ALWAYS"
-             tabMinWidth="140"
-             tabMinHeight="30"
-             style="-fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 4);">
+             tabMinWidth="150"
+             tabMinHeight="35"
+             style="-fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4);">
 
         <tabs>
-            <Tab text="🏠 Alojamientos" fx:id="tab1" closable="false"/>
-            <Tab text="💰 Ofertas" fx:id="tab2" closable="false"/>
-            <Tab text="🔥 Populares" fx:id="tab3" closable="false"/>
-            <Tab text="📈 Rentables" fx:id="tab4" closable="false"/>
-            <Tab text="📊 Estadísticas" fx:id="tab5" closable="false"/>
+            <Tab text="📅 Crear Reserva" fx:id="tab1" closable="false"/>
+            <Tab text="📂 Mis Reservas" fx:id="tab2" closable="false"/>
+            <Tab text="👤 Mi Cuenta" fx:id="tab3" closable="false"/>
+            <Tab text="💳 Recargar" fx:id="tab4" closable="false"/>
         </tabs>
     </TabPane>
 

@@ -14,10 +14,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -45,14 +42,11 @@ public class AdministradorService {
      * @param capacidadMaxima
      * @throws Exception
      */
-    public void registrarAlojamiento(String tipo, String id, String nombre, String ciudad,
-                                     String descripcion, float precioNoche, byte capacidadMaxima, Image imagenAlojamiento, List<String> servicios) throws Exception {
+    public void registrarAlojamiento(String tipo, String nombre, String ciudad,
+                                     String descripcion, float precioNoche, int capacidadMaxima, Image imagenAlojamiento, List<String> servicios) throws Exception {
 
         String mensajesValidacion = "";
 
-        if (id == null || id.isEmpty()) {
-            mensajesValidacion += "Debe ingresar el ID del alojamiento\n";
-        }
 
         if (nombre == null || nombre.isEmpty()) {
             mensajesValidacion += "Debe ingresar el nombre del alojamiento\n";
@@ -78,9 +72,7 @@ public class AdministradorService {
             throw new Exception(mensajesValidacion);
         }
 
-        if (alojamientoRepositorio.obtenerPorId(id) != null) {
-            throw new Exception("Ya existe un alojamiento con ese ID");
-        }
+        String id = UUID.randomUUID().toString();
 
         Alojamiento alojamiento = AlojamientoFactory.crearAlojamiento(
                 tipo, id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios

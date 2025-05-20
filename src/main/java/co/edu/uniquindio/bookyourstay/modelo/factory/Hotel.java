@@ -14,7 +14,7 @@ public class Hotel extends Alojamiento {
 
     List<Habitacion> listaHabitaciones = new ArrayList<>();
 
-    public Hotel(String id, String nombre, String ciudad, String descripcion, float precioNoche, byte capacidadMaxima, Image imagenAlojamiento, List<String> servicios) {
+    public Hotel(String id, String nombre, String ciudad, String descripcion, float precioNoche, int capacidadMaxima, Image imagenAlojamiento, List<String> servicios) {
         super(id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios);
     }
 

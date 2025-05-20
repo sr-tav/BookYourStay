@@ -14,7 +14,7 @@ public abstract class Alojamiento {
 
     private String id, nombre, ciudad, descripcion;
     public float precioNoche;
-    private byte capacidadMaxima;
+    private int capacidadMaxima;
     private Image imagenAlojamiento;
     private List<String> servicios;
 

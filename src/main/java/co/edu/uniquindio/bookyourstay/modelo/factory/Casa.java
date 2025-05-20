@@ -11,7 +11,7 @@ import java.util.List;
 public class Casa extends Alojamiento {
 
 
-    public Casa(String id, String nombre, String ciudad, String descripcion, float precioNoche, byte capacidadMaxima, Image imagenAlojamiento, List<String> servicios) {
+    public Casa(String id, String nombre, String ciudad, String descripcion, float precioNoche, int capacidadMaxima, Image imagenAlojamiento, List<String> servicios) {
         super(id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios);
     }
 

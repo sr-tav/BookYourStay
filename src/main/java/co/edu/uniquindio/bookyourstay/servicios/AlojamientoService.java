@@ -43,4 +43,8 @@ public class AlojamientoService {
         Collections.shuffle(todos);
         return todos.subList(0, Math.min(cantidad, todos.size()));
     }
+
+    public List<String> obtenerTiposAlojamiento() {
+        return List.of("Hotel", "Apartamento", "Casa");
+    }
 }

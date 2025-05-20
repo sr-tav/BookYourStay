@@ -51,6 +51,7 @@ public class AutenticacionService {
             throw new Exception("La cuenta no está activada. Verifica tu correo electrónico.");
         }
 
+
         return usuario;
     }
 

@@ -11,52 +11,55 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 
-<BorderPane prefHeight="560.0" prefWidth="700.0"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.edu.uniquindio.bookyourstay.controladores.ReservaControlador"
-            style="-fx-background-color: #f5f7fa;">
+<ScrollPane fitToWidth="true" fitToHeight="true"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.bookyourstay.controladores.ReservaControlador">
 
-    <top>
-        <VBox spacing="12" style="-fx-background-color: #00796b; -fx-padding: 20 30 20 30;" BorderPane.alignment="CENTER">
-            <Label text="Buscar Alojamiento por Ciudad"
-                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" />
-            <HBox spacing="15" alignment="CENTER">
-                <TextField fx:id="ciudadTextField" promptText="Ingrese una ciudad..."
-                           HBox.hgrow="ALWAYS"
-                           style="-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 14px;" />
-                <Button text="Buscar"
-                        style="-fx-background-color: #004d40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" />
-            </HBox>
-        </VBox>
-    </top>
-
-    <center>
-        <SplitPane dividerPositions="0.55" orientation="HORIZONTAL" style="-fx-padding: 25 20 25 20;">
-            <!-- Lista de alojamientos -->
-            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8,0,0,3);">
-                <Label text="Resultados de búsqueda"
-                       style="-fx-font-size: 17px; -fx-font-weight: 600; -fx-text-fill: #004d40;" />
-                <ListView fx:id="listaAlojamientos" prefWidth="320" style="-fx-background-radius: 12;" />
+    <BorderPane style="-fx-background-color: #f5f7fa;">
+        <top>
+            <VBox spacing="12" style="-fx-background-color: #00796b; -fx-padding: 20 30 20 30;" BorderPane.alignment="CENTER">
+                <Label text="Buscar Alojamiento por Ciudad"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                <HBox spacing="15" alignment="CENTER">
+                    <TextField fx:id="ciudadTextField" promptText="Ingrese una ciudad..."
+                               HBox.hgrow="ALWAYS"
+                               style="-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 14px;" />
+                    <Button text="Buscar"
+                            style="-fx-background-color: #004d40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" />
+                </HBox>
             </VBox>
+        </top>
 
-            <!-- Formulario de reserva -->
-            <VBox spacing="18" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8,0,0,3);">
-                <Label text="Datos de la Reserva"
-                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #004d40;" />
+        <center>
+            <SplitPane dividerPositions="0.55" orientation="HORIZONTAL" style="-fx-padding: 25 20 25 20;">
+                <!-- Lista de alojamientos -->
+                <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8,0,0,3);">
+                    <Label text="Resultados de búsqueda"
+                           style="-fx-font-size: 17px; -fx-font-weight: 600; -fx-text-fill: #004d40;" />
+                    <ListView fx:id="listaAlojamientos" prefWidth="320" style="-fx-background-radius: 12;" />
+                </VBox>
 
-                <Label text="Fecha de entrada:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
-                <DatePicker fx:id="fechaEntradaPicker" style="-fx-background-radius: 8;" />
+                <!-- Formulario de reserva -->
+                <VBox spacing="18" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8,0,0,3);">
+                    <Label text="Datos de la Reserva"
+                           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #004d40;" />
 
-                <Label text="Fecha de salida:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
-                <DatePicker fx:id="fechaSalidaPicker" style="-fx-background-radius: 8;" />
+                    <Label text="Fecha de entrada:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
+                    <DatePicker fx:id="fechaEntradaPicker" style="-fx-background-radius: 8;" />
 
-                <Label text="Número de huéspedes:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
-                <Spinner fx:id="spinnerHuespedes" editable="true" style="-fx-background-radius: 8;" />
+                    <Label text="Fecha de salida:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
+                    <DatePicker fx:id="fechaSalidaPicker" style="-fx-background-radius: 8;" />
 
-                <Button text="Confirmar Reserva"
-                        style="-fx-background-color: #00796b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 20; -fx-padding: 12 20;" />
-            </VBox>
-        </SplitPane>
-    </center>
-</BorderPane>
+                    <Label text="Número de huéspedes:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
+                    <Spinner fx:id="spinnerHuespedes" editable="true" style="-fx-background-radius: 8;" />
+
+                    <Button text="Confirmar Reserva"
+                            style="-fx-background-color: #00796b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 20; -fx-padding: 12 20;" />
+                </VBox>
+            </SplitPane>
+        </center>
+    </BorderPane>
+</ScrollPane>
