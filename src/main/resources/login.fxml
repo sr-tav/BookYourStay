@@ -4,27 +4,58 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="co.edu.uniquindio.bookyourstay.controladores.LoginControlador"
-      prefHeight="400.0" prefWidth="400.0" alignment="center" spacing="30.0" >
+      alignment="CENTER"
+      spacing="30"
+      prefWidth="450" prefHeight="500"
+      style="-fx-background-color: linear-gradient(to bottom, #e0f7fa, #ffffff); -fx-padding: 40; -fx-background-radius: 20;">
 
-    <Label text="Iniciar sesion" >
+    <!-- Título -->
+    <Label text="Bienvenido de nuevo 👋"
+           style="-fx-text-fill: #0a3d62; -fx-font-weight: bold;">
         <font>
-            <Font size="18.0" />
+            <Font size="26.0"/>
         </font>
     </Label>
 
-    <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
-        <Label text="Correo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="30.0" />
+    <!-- Contenedor de campos -->
+    <VBox spacing="20" style="-fx-background-color: #ffffff; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 5);">
 
-        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <PasswordField fx:id="txtContrasena" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="30.0" />
-    </GridPane>
+        <!-- Correo -->
+        <VBox spacing="5">
+            <Label text="Correo electrónico"
+                   style="-fx-text-fill: #333333; -fx-font-size: 14px; -fx-font-weight: bold;" />
+            <TextField fx:id="txtEmail"
+                       promptText="correo@ejemplo.com"
+                       style="-fx-background-color: #f4f4f4; -fx-background-radius: 10; -fx-padding: 10; -fx-font-size: 13px;"
+                       minHeight="35"/>
+        </VBox>
 
-    <Label fx:id="errorText" textFill="#eb5454" />
+        <!-- Contraseña -->
+        <VBox spacing="5">
+            <Label text="Contraseña"
+                   style="-fx-text-fill: #333333; -fx-font-size: 14px; -fx-font-weight: bold;" />
+            <PasswordField fx:id="txtContrasena"
+                           promptText="••••••••"
+                           style="-fx-background-color: #f4f4f4; -fx-background-radius: 10; -fx-padding: 10; -fx-font-size: 13px;"
+                           minHeight="35"/>
+        </VBox>
 
-    <Button onAction="#iniciarSesion"  text="Iniciar Sesion"  minHeight="40.0" minWidth="130.0" style="-fx-background-color: #00807a; -fx-text-fill: white" />
+        <!-- Error -->
+        <Label fx:id="errorText"
+               style="-fx-text-fill: #e74c3c; -fx-font-size: 13px;"/>
+
+        <!-- Botón -->
+        <Button text="Iniciar Sesión"
+                onAction="#iniciarSesion"
+                style="-fx-background-color: #0abde3; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 20;"
+                prefWidth="160" prefHeight="40"/>
+
+        <!-- Enlace adicional (opcional) -->
+        <Hyperlink text="¿Olvidaste tu contraseña?"
+                   style="-fx-text-fill: #2980b9; -fx-font-size: 13px;"/>
+    </VBox>
 
 </VBox>

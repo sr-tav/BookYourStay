@@ -3,35 +3,53 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="co.edu.uniquindio.bookyourstay.controladores.RegistroControlador"
-      prefHeight="400.0" prefWidth="400.0" alignment="center" spacing="30.0" >
+      prefHeight="480.0" prefWidth="460.0" alignment="TOP_CENTER" spacing="50"
+      style="-fx-background-color: linear-gradient(to bottom right, #e0f2f1, #80cbc4); -fx-padding: 50 60 50 60;">
 
-    <Label text="Crear nueva cuenta" >
+    <!-- Título -->
+    <Label text="Crear nueva cuenta" textFill="#004d40" style="-fx-font-weight: 900; -fx-effect: dropshadow( gaussian , rgba(0,77,64,0.35) , 5,0,0,2);">
         <font>
-            <Font size="18.0" />
+            <Font size="26" />
         </font>
     </Label>
 
-    <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
-        <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="30.0" />
+    <!-- Formulario con fondo blanco translúcido y sombra -->
+    <GridPane alignment="CENTER" hgap="18" vgap="22"
+              style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-padding: 30 35 30 35; -fx-background-radius: 18; -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.12) , 15,0,0,6);">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="150" />
+            <ColumnConstraints halignment="LEFT" minWidth="270" />
+        </columnConstraints>
 
-        <Label text="cedula:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="txtCedula" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="30.0" />
+        <!-- Labels con fuente semibold y color calmado -->
+        <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 17; -fx-text-fill: #00796b; -fx-font-weight: 600;" />
+        <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" minHeight="38"
+                   style="-fx-font-size: 15; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 0 12 0 12;" />
 
-        <Label text="Telefono:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" minHeight="30.0" />
+        <Label text="Cédula:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-size: 17; -fx-text-fill: #00796b; -fx-font-weight: 600;" />
+        <TextField fx:id="txtCedula" GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="38"
+                   style="-fx-font-size: 15; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 0 12 0 12;" />
 
-        <Label text="Correo:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="30.0" />
+        <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-size: 17; -fx-text-fill: #00796b; -fx-font-weight: 600;" />
+        <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" minHeight="38"
+                   style="-fx-font-size: 15; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 0 12 0 12;" />
 
-        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <PasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="30.0" />
+        <Label text="Correo:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-size: 17; -fx-text-fill: #00796b; -fx-font-weight: 600;" />
+        <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="3" minHeight="38"
+                   style="-fx-font-size: 15; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 0 12 0 12;" />
+
+        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-size: 17; -fx-text-fill: #00796b; -fx-font-weight: 600;" />
+        <PasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="4" minHeight="38"
+                       style="-fx-font-size: 15; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 0 12 0 12;" />
     </GridPane>
 
-    <Button text="Registrarse"  onAction="#registrarCliente" minHeight="40.0" minWidth="130.0" style="-fx-background-color: #00807a; -fx-text-fill: white" />
+    <!-- Botón principal -->
+    <Button text="Registrarse" onAction="#registrarCliente" minHeight="50" minWidth="190"
+            style="-fx-background-color: #004d40; -fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: 700; -fx-background-radius: 25; -fx-effect: dropshadow( gaussian , rgba(0,77,64,0.6) , 12,0,0,4);" />
 
 </VBox>

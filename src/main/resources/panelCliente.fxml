@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       spacing="30.0"
-      fx:controller="co.edu.uniquindio.bookyourstay.controladores.PanelClienteControlador"
-      prefWidth="800"
-      prefHeight="600">
+      style="-fx-padding: 30; -fx-background-color: linear-gradient(to bottom, #ecf0f1, #ffffff);"
+      fx:controller="co.edu.uniquindio.bookyourstay.controladores.PanelAdministradorControlador"
+      prefHeight="600.0" prefWidth="900.0">
 
-    <HBox alignment="CENTER" spacing="10.0">
-        <ImageView fitWidth="50.0" preserveRatio="true">
-            <!-- Asegúrate de que la ruta sea correcta según la estructura del proyecto -->
-            <Image url="@img/clinica.png"/>
-        </ImageView>
-        <Label text="Panel del cliente">
+    <!-- Encabezado -->
+    <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: #2c3e50; -fx-padding: 15; -fx-background-radius: 10;">
+        <Label text="🛠 Panel del Administrador"
+               style="-fx-text-fill: white;">
             <font>
-                <Font size="20.0"/>
+                <Font size="22.0"/>
             </font>
         </Label>
     </HBox>
 
-    <TabPane VBox.vgrow="ALWAYS">
+    <!-- Panel de pestañas -->
+    <TabPane VBox.vgrow="ALWAYS"
+             tabMinWidth="140"
+             tabMinHeight="30"
+             style="-fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 4);">
+
         <tabs>
-            <Tab text="Reservar" fx:id="tab1" closable="false" />
-            <Tab text="Mis Reservas" fx:id="tab2" closable="false" />
-            <Tab text="Mi cuenta" fx:id="tab3" closable="false" />
-            <Tab text="Recargar" fx:id="tab4" closable="false" />
+            <Tab text="🏠 Alojamientos" fx:id="tab1" closable="false"/>
+            <Tab text="💰 Ofertas" fx:id="tab2" closable="false"/>
+            <Tab text="🔥 Populares" fx:id="tab3" closable="false"/>
+            <Tab text="📈 Rentables" fx:id="tab4" closable="false"/>
+            <Tab text="📊 Estadísticas" fx:id="tab5" closable="false"/>
         </tabs>
     </TabPane>
 

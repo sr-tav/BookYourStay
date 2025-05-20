@@ -6,60 +6,56 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="531.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.ReservaControlador">
+<BorderPane prefHeight="560.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.bookyourstay.controladores.ReservaControlador"
+            style="-fx-background-color: #f5f7fa;">
 
     <top>
-        <VBox prefHeight="82.0" prefWidth="394.0" spacing="10.0">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Buscar Alojamiento por Ciudad" />
-            <HBox spacing="10">
-                <TextField fx:id="ciudadTextField" promptText="Ingrese una ciudad..." HBox.hgrow="ALWAYS" />
-                <Button text="Buscar" />
+        <VBox spacing="12" style="-fx-background-color: #00796b; -fx-padding: 20 30 20 30;" BorderPane.alignment="CENTER">
+            <Label text="Buscar Alojamiento por Ciudad"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <HBox spacing="15" alignment="CENTER">
+                <TextField fx:id="ciudadTextField" promptText="Ingrese una ciudad..."
+                           HBox.hgrow="ALWAYS"
+                           style="-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 14px;" />
+                <Button text="Buscar"
+                        style="-fx-background-color: #004d40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" />
             </HBox>
         </VBox>
     </top>
 
     <center>
-        <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
+        <SplitPane dividerPositions="0.55" orientation="HORIZONTAL" style="-fx-padding: 25 20 25 20;">
             <!-- Lista de alojamientos -->
-            <VBox spacing="10.0">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </padding>
-                <Label text="Resultados de búsqueda" />
-                <ListView fx:id="listaAlojamientos" prefWidth="250" />
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8,0,0,3);">
+                <Label text="Resultados de búsqueda"
+                       style="-fx-font-size: 17px; -fx-font-weight: 600; -fx-text-fill: #004d40;" />
+                <ListView fx:id="listaAlojamientos" prefWidth="320" style="-fx-background-radius: 12;" />
             </VBox>
 
             <!-- Formulario de reserva -->
-            <VBox prefHeight="447.0" prefWidth="177.0" spacing="10.0">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </padding>
-                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Datos de la Reserva" />
+            <VBox spacing="18" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8,0,0,3);">
+                <Label text="Datos de la Reserva"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #004d40;" />
 
-                <Label text="Fecha de entrada:" />
-                <DatePicker fx:id="fechaEntradaPicker" />
+                <Label text="Fecha de entrada:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
+                <DatePicker fx:id="fechaEntradaPicker" style="-fx-background-radius: 8;" />
 
-                <Label text="Fecha de salida:" />
-                <DatePicker fx:id="fechaSalidaPicker" />
+                <Label text="Fecha de salida:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
+                <DatePicker fx:id="fechaSalidaPicker" style="-fx-background-radius: 8;" />
 
-                <Label text="Número de huéspedes:" />
-                <Spinner fx:id="spinnerHuespedes" editable="true">
-                    <valueFactory>
-                        <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="1" max="20" min="1" />
-                    </valueFactory>
-                </Spinner>
+                <Label text="Número de huéspedes:" style="-fx-font-weight: 600; -fx-font-size: 14px;"/>
+                <Spinner fx:id="spinnerHuespedes" editable="true" style="-fx-background-radius: 8;" />
 
-                <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Confirmar Reserva" />
+                <Button text="Confirmar Reserva"
+                        style="-fx-background-color: #00796b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 20; -fx-padding: 12 20;" />
             </VBox>
         </SplitPane>
     </center>
