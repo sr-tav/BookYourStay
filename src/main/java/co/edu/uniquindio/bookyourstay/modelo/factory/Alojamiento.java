@@ -20,8 +20,6 @@ public abstract class Alojamiento {
 
     public abstract String getTipo();
 
-    public abstract List<String> getServiciosDisponible();
-
 }
 
 

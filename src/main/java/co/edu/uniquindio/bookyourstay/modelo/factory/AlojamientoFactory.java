@@ -9,37 +9,29 @@ public class AlojamientoFactory {
     public static Alojamiento crearAlojamiento(String tipo, String id, String nombre, String ciudad,
                                                String descripcion, float precioNoche, int capacidadMaxima, Image imagenAlojamiento, List<String> servicios) throws Exception {
         switch (tipo.toLowerCase()){
-            case "Casa":
+            case "casa":
                 return new Casa(id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios);
-            case "Apartamento":
+            case "apartamento":
                 return new Apartamento(id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios);
-            case "Hotel":
+            case "hotel":
                 return new Hotel(id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios);
             default:
                 throw new Exception("tipo de alojamiento no valido");
         }
     }
 
-    /**
-     *
-     * @param tipo
-     * @return
-     * @throws Exception
     public static List<String> obtenerServiciosPorTipo(String tipo) throws Exception {
-        Alojamiento alojamiento = crearAlojamiento(
-                tipo,
-                "tmp",              // ID temporal
-                "tmp",              // Nombre temporal
-                "tmp",              // Ciudad
-                "tmp",              // Descripción
-                0,                  // Precio
-                1,                  // Capacidad
-                null,               // Imagen
-                List.of()           // Lista vacía para no alterar nada
-        );
-        return alojamiento.getServiciosDisponibles();
+        switch (tipo.toLowerCase()) {
+            case "casa":
+                return List.of("Parrilla", "Patio", "Cocina equipada");
+            case "apartamento":
+                return List.of("WiFi", "Aire acondicionado", "Ascensor");
+            case "hotel":
+                return List.of("Servicio a la habitación", "Desayuno incluido", "Piscina");
+            default:
+                throw new Exception("Tipo de alojamiento no válido");
+        }
     }
-    */
 
     public static List<String> obtenerTiposAlojamiento() {
         return List.of("Hotel", "Apartamento", "Casa");

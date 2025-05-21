@@ -5,6 +5,7 @@ import co.edu.uniquindio.bookyourstay.modelo.factory.AlojamientoFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -37,8 +39,6 @@ public class NuevoAlojamientoControlador implements Initializable {
     @FXML
     private TextField txtPrecio;
 
-    @FXML
-    private ListView<String> serviciosListView;
 
     @FXML
     private ComboBox<String> comboTipo;
@@ -65,6 +65,13 @@ public class NuevoAlojamientoControlador implements Initializable {
 
             Image imagen = imagenPreview.getImage();
 
+            List<String> serviciosSeleccionados = new ArrayList<>();
+            for (Node node : vboxServicios.getChildren()) {
+                if (node instanceof CheckBox checkBox && checkBox.isSelected()) {
+                    serviciosSeleccionados.add(checkBox.getText());
+                }
+            }
+
             controladorPrincipal.getAdministradorService().registrarAlojamiento(
                     comboTipo.getValue(), // Tipo como String
                     txtNombre.getText(),
@@ -73,7 +80,7 @@ public class NuevoAlojamientoControlador implements Initializable {
                     precio,
                     capacidadSpinner.getValue(),
                     imagen,
-                    serviciosListView.getItems()
+                    serviciosSeleccionados
             );
 
             controladorPrincipal.mostrarAlerta("Alojamiento registrado correctamente", Alert.AlertType.INFORMATION);
@@ -114,17 +121,24 @@ public class NuevoAlojamientoControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboTipo.getItems().addAll(controladorPrincipal.getAlojamientoService().obtenerTiposAlojamiento());
-        /**
+
         comboTipo.setOnAction(event -> {
             String tipoSeleccionado = comboTipo.getValue();
+            vboxServicios.getChildren().clear();  // Limpiar servicios anteriores
+
             try {
                 List<String> servicios = AlojamientoFactory.obtenerServiciosPorTipo(tipoSeleccionado);
-                lblServicios.setText(String.join(", ", servicios));
+
+                for (String servicio : servicios) {
+                    CheckBox checkBox = new CheckBox(servicio);
+                    vboxServicios.getChildren().add(checkBox);
+                }
             } catch (Exception e) {
-                lblServicios.setText("Tipo inválido");
+                Label errorLabel = new Label("Tipo inválido");
+                vboxServicios.getChildren().add(errorLabel);
             }
         });
-         */
+
     }
 }
 

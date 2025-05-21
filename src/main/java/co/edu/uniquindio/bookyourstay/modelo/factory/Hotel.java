@@ -24,10 +24,6 @@ public class Hotel extends Alojamiento {
         return "hotel";
     }
 
-    @Override
-    public List<String> getServiciosDisponible() {
-        return List.of("Desayuno", "wifi", "Aire acondicionado", "Domicilios");
-    }
 
 
 }

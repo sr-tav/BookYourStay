@@ -32,8 +32,8 @@
         </valueFactory>
     </Spinner>
 
-    <Label text="Servicios incluidos automáticamente según el tipo:" />
-    <Label fx:id="lblServicios" text="Servicios disponibles aparecerán aquí" wrapText="true" />
+    <Label text="Seleccione los servicios:" />
+    <VBox fx:id="vboxServicios" spacing="5" prefHeight="100" prefWidth="487" style="-fx-border-color: gray; -fx-padding: 5;" />
 
     <HBox spacing="10">
         <ImageView fx:id="imagenPreview" fitHeight="100" fitWidth="150" />

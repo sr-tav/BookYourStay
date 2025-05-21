@@ -20,9 +20,6 @@ public class Casa extends Alojamiento {
         return "casa";
     }
 
-    @Override
-    public List<String> getServiciosDisponible() {
-        return List.of("Piscina", "Wifi", "lavanderia", "Aire acondicionado");
-    }
+
 
 }

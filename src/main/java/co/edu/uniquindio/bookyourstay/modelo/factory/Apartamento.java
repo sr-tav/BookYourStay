@@ -15,10 +15,7 @@ public class Apartamento extends Alojamiento {
         return "apartamento";
     }
 
-    @Override
-    public List<String> getServiciosDisponible() {
-        return List.of("wifi", "Aire acondicionado", "lavandería");
-    }
+
 
 
 }
