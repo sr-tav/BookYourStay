@@ -20,6 +20,14 @@ public abstract class Alojamiento {
 
     public abstract String getTipo();
 
+    @Override
+    public String toString() {
+        return   nombre + '\'' +
+                ciudad + '\'' +
+                precioNoche +
+                capacidadMaxima;
+
+    }
 }
 
 

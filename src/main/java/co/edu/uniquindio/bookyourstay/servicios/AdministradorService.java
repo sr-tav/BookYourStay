@@ -252,4 +252,20 @@ public class AdministradorService {
         return estadisticas;
     }
 
+    public void eliminarAlojamientoConOfertas(String idAlojamiento)  {
+        Alojamiento alojamiento = alojamientoRepositorio.obtenerPorId(idAlojamiento);
+
+        // Eliminar las ofertas asociadas
+        List<Oferta> ofertasAsociadas = ofertaRepositorio.listar().stream()
+                .filter(o -> o.getAlojamiento().getId().equals(idAlojamiento))
+                .collect(Collectors.toList());
+
+        for (Oferta oferta : ofertasAsociadas) {
+            ofertaRepositorio.eliminar(oferta);
+        }
+
+        // Eliminar el alojamiento
+        alojamientoRepositorio.eliminar(alojamiento);
+    }
+
 }

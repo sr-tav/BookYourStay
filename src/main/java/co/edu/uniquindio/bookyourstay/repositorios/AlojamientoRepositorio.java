@@ -50,4 +50,7 @@ public class AlojamientoRepositorio {
     public List<Alojamiento> listar() {
         return new ArrayList<>(alojamientos);
     }
+
+
+
 }

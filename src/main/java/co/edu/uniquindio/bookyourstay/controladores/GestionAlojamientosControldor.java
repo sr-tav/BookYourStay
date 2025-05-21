@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.List;
@@ -49,6 +50,9 @@ public class GestionAlojamientosControldor implements Initializable, IActualizac
     private TableView<Alojamiento> tablaAlojamientos;
 
     private final ControladorPrincipal controladorPrincipal;
+
+    @Setter
+    private GestionOfertasControlador gestionOfertasControlador;
 
     private ObservableList<Alojamiento> alojamientoObservableList;
 
@@ -152,13 +156,14 @@ public class GestionAlojamientosControldor implements Initializable, IActualizac
 
             if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
                 ControladorPrincipal.getInstancia()
-                        .getAlojamientoRepositorio()
-                        .eliminar(alojamientoSeleccionado);
+                        .getAdministradorService()
+                        .eliminarAlojamientoConOfertas(alojamientoSeleccionado.getId());
 
                 ControladorPrincipal.getInstancia()
                         .mostrarAlerta("Alojamiento eliminado correctamente", Alert.AlertType.INFORMATION);
 
                 cargarAlojamientos(); // Actualizar la tabla después de eliminar
+                gestionOfertasControlador.cargarOfertas();
             }
         } else {
             ControladorPrincipal.getInstancia()
@@ -182,5 +187,6 @@ public class GestionAlojamientosControldor implements Initializable, IActualizac
     public void actualizarTabla() {
         cargarAlojamientos();
     }
+
 }
 
