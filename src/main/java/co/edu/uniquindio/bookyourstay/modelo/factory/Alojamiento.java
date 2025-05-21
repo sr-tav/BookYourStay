@@ -20,6 +20,10 @@ public abstract class Alojamiento {
 
     public abstract String getTipo();
 
+    /**
+     * metodo toString
+     * @return
+     */
     @Override
     public String toString() {
         return   nombre + '\'' +
