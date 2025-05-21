@@ -34,7 +34,6 @@ public class AdministradorService {
     /**
      * metodo para agregar un alojamiento
      * @param tipo
-     * @param id
      * @param nombre
      * @param ciudad
      * @param descripcion
@@ -72,7 +71,9 @@ public class AdministradorService {
             throw new Exception(mensajesValidacion);
         }
 
-        String id = UUID.randomUUID().toString();
+        Random random = new Random();
+        long number = Math.abs(random.nextLong() % 1_000_000_0000L);
+        String id = String.format("%010d", number);
 
         Alojamiento alojamiento = AlojamientoFactory.crearAlojamiento(
                 tipo, id, nombre, ciudad, descripcion, precioNoche, capacidadMaxima, imagenAlojamiento, servicios
@@ -80,6 +81,45 @@ public class AdministradorService {
 
         alojamientoRepositorio.agregar(alojamiento);
     }
+
+    /**
+    public void actualizarAlojamiento(
+            Alojamiento alojamiento,
+            String tipo,
+            String nombre,
+            String ciudad,
+            String descripcion,
+            float precio,
+            int capacidad,
+            Image imagen,
+            List<String> servicios
+    ) throws Exception {
+
+        // Validaciones básicas
+        if (nombre == null || nombre.isBlank()) {
+            throw new Exception("El nombre no puede estar vacío.");
+        }
+
+        if (precio <= 0) {
+            throw new Exception("El precio debe ser mayor que 0.");
+        }
+
+        // Actualizar directamente el alojamiento
+        alojamiento.setTipo(tipo);
+        alojamiento.setNombre(nombre);
+        alojamiento.setCiudad(ciudad);
+        alojamiento.setDescripcion(descripcion);
+        alojamiento.setPrecioNoche(precio);
+        alojamiento.setCapacidadMaxima(capacidad);
+        alojamiento.setImagenAlojamiento(imagen);
+        alojamiento.setServicios(servicios);
+
+        // Persistir los cambios si es necesario
+        alojamientoRepositorio.actualizar(alojamiento);
+    }
+     */
+
+
 
     /**
      * metodo para eliminar un alojamiento

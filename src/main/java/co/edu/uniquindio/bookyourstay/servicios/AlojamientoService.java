@@ -47,4 +47,5 @@ public class AlojamientoService {
     public List<String> obtenerTiposAlojamiento() {
         return List.of("Hotel", "Apartamento", "Casa");
     }
+
 }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.bookyourstay.controladores;
 
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.AlojamientoFactory;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,11 +50,35 @@ public class NuevoAlojamientoControlador implements Initializable {
     @FXML
     private Label lblServicios;
 
+    @FXML
+    private TableColumn<Alojamiento, String> colCiudad;
+
+    @FXML
+    private TableColumn<Alojamiento, String> colDescripcion;
+
+    @FXML
+    private TableColumn<Alojamiento, String> colId;
+
+    @FXML
+    private TableColumn<Alojamiento, String> colNombre;
+
+    @FXML
+    private TableColumn<Alojamiento, String> colpreioPorNoche;
+
+    @FXML
+    private TableView<Alojamiento> tablaAlojamientos;
+
+    private IActualizacion iActualizacion;
+
 
     private final ControladorPrincipal controladorPrincipal;
 
     public NuevoAlojamientoControlador() {
         this.controladorPrincipal = ControladorPrincipal.getInstancia();
+    }
+
+    public void setInterfazActualizacion(IActualizacion iActualizacion){
+        this.iActualizacion = iActualizacion;
     }
 
 
@@ -84,7 +109,7 @@ public class NuevoAlojamientoControlador implements Initializable {
             );
 
             controladorPrincipal.mostrarAlerta("Alojamiento registrado correctamente", Alert.AlertType.INFORMATION);
-
+            iActualizacion.actualizarTabla();
             limpiarFormulario();
 
         } catch (Exception e) {
@@ -115,13 +140,19 @@ public class NuevoAlojamientoControlador implements Initializable {
 
     private void limpiarFormulario() {
         comboTipo.setValue(null);
+        txtNombre.setText("");
+        txtCiudad.setText("");
+        txtDescripcion.setText("");
+        txtPrecio.setText("");
+        capacidadSpinner.getValueFactory().setValue(1);
+        imagenPreview.setImage(null);
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        comboTipo.getItems().addAll(controladorPrincipal.getAlojamientoService().obtenerTiposAlojamiento());
 
+        comboTipo.getItems().addAll(controladorPrincipal.getAlojamientoService().obtenerTiposAlojamiento());
         comboTipo.setOnAction(event -> {
             String tipoSeleccionado = comboTipo.getValue();
             vboxServicios.getChildren().clear();  // Limpiar servicios anteriores
@@ -134,7 +165,7 @@ public class NuevoAlojamientoControlador implements Initializable {
                     vboxServicios.getChildren().add(checkBox);
                 }
             } catch (Exception e) {
-                Label errorLabel = new Label("Tipo inválido");
+                Label errorLabel = new Label("Seleccione un tipo");
                 vboxServicios.getChildren().add(errorLabel);
             }
         });

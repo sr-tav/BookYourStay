@@ -17,6 +17,8 @@ public class AlojamientoRepositorio {
         alojamientos.add(alojamiento);
     }
 
+
+
     public void eliminar(Alojamiento alojamiento) {
         alojamientos.remove(alojamiento);
     }
@@ -28,6 +30,11 @@ public class AlojamientoRepositorio {
             }
         }
         return null;
+    }
+
+    public void actualizar(Alojamiento alojamiento) {
+        // Si estás usando una lista, no necesitas hacer nada más.
+        // Si estás guardando en archivo o BD, persiste los cambios aquí.
     }
 
     public List<Alojamiento> obtenerPorCiudad(String ciudad) {
