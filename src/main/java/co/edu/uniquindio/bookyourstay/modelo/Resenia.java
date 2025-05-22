@@ -6,13 +6,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Resenia {
+public class Resenia implements Serializable {
 
     Cliente cliente;
     Alojamiento alojamiento;

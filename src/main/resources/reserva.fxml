@@ -14,13 +14,14 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.ReservaControlador">
 
+
     <BorderPane style="-fx-background-color: #f5f7fa;">
         <top>
             <VBox spacing="12" style="-fx-background-color: #00796b; -fx-padding: 20 30 20 30;" BorderPane.alignment="CENTER">
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" text="Buscar Alojamiento por Ciudad" />
                 <HBox alignment="CENTER" spacing="15">
                     <TextField fx:id="ciudadTextField" promptText="Ingrese una ciudad..." style="-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 14px;" HBox.hgrow="ALWAYS" />
-                    <Button style="-fx-background-color: #004d40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" text="Buscar" />
+                    <Button style="-fx-background-color: #004d40; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 8 16;" text="Buscar" onAction="#buscarAlojamiento" />
                 </HBox>
             </VBox>
         </top>
@@ -46,7 +47,8 @@
                     <Label style="-fx-font-weight: 600; -fx-font-size: 14px;" text="Número de huéspedes:" />
                     <Spinner fx:id="spinnerHuespedes" editable="true" style="-fx-background-radius: 8;" />
 
-                    <Button style="-fx-background-color: #00796b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 20; -fx-padding: 12 20;" text="Confirmar Reserva" />
+
+                    <Button style="-fx-background-color: #00796b; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 20; -fx-padding: 12 20;" text="Confirmar Reserva" onAction="#realizarReserva" />
                 </VBox>
             </SplitPane>
         </center>

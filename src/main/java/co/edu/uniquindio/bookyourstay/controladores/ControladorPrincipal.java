@@ -25,6 +25,7 @@ public class ControladorPrincipal {
     private final AdministradorService administradorService;
     private final ReservaService reservaService;
     private final AlojamientoService alojamientoService;
+    private final BilleteraService billeteraService;
 
     private Usuario usuarioActual;
 
@@ -41,7 +42,8 @@ public class ControladorPrincipal {
         this.autenticacionService = new AutenticacionService(usuarioRepositorio);
         this.clienteService = new ClienteService(usuarioRepositorio, autenticacionService, alojamientoRepositorio, resenaRepositorio, reservaRepositorio);
         this.administradorService = new AdministradorService(alojamientoRepositorio, ofertaRepositorio, reservaRepositorio);
-        this.reservaService = new ReservaService(reservaRepositorio, usuarioRepositorio);
+        this.billeteraService = new BilleteraService(usuarioRepositorio);
+        this.reservaService = new ReservaService(reservaRepositorio, usuarioRepositorio, billeteraService);
         this.alojamientoService = new AlojamientoService(alojamientoRepositorio);
     }
 

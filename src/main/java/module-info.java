@@ -4,6 +4,8 @@ module co.edu.uniquindio.bookyourstay {
     requires static lombok;
     requires org.simplejavamail.core;
     requires org.simplejavamail;
+    requires java.desktop;
+    requires java.sql.rowset;
 
 
     opens co.edu.uniquindio.bookyourstay.controladores to javafx.fxml;

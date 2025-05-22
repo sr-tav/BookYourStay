@@ -24,10 +24,12 @@ public class ReservaService {
 
     private final ReservaRepositorio reservaRepositorio;
     private final UsuarioRepositorio usuarioRepositorio;
+    private final BilleteraService billeteraService;
 
-    public ReservaService(ReservaRepositorio reservaRepositorio, UsuarioRepositorio usuarioRepositorio) {
+    public ReservaService(ReservaRepositorio reservaRepositorio, UsuarioRepositorio usuarioRepositorio, BilleteraService billeteraService) {
         this.reservaRepositorio = reservaRepositorio;
         this.usuarioRepositorio = usuarioRepositorio;
+        this.billeteraService = billeteraService;
     }
 
     /**
@@ -91,8 +93,11 @@ public class ReservaService {
             throw new Exception("La fecha de fin debe ser posterior a la de inicio.");
         }
 
-        Reserva reserva = Reserva.builder()
-                .id(UUID.randomUUID().toString())
+        String id = String.valueOf((int) (Math.random() * 9000) + 1000); // Genera un número entre 1000 y 9999
+
+
+        Reserva reservaTemporal = Reserva.builder()
+                .id(String.valueOf((int)(Math.random() * 9000) + 1000))
                 .cliente(cliente)
                 .alojamiento(alojamiento)
                 .fechaInicio(inicio)
@@ -101,11 +106,14 @@ public class ReservaService {
                 .factura(null)
                 .build();
 
+        Factura factura = generarFactura(reservaTemporal);
 
-        Factura factura = generarFactura(reserva);
-        reserva.setFactura(factura);
+        // Procesar el pago a través de billeteraService
+        billeteraService.procesarPago(cedulaCliente, factura.getTotal());
 
-        reservaRepositorio.agregar(reserva);
+        // Si no lanza excepción, continuar con la reserva
+        reservaTemporal.setFactura(factura);
+        reservaRepositorio.agregar(reservaTemporal);
 
         String mensaje = cliente.getNombre()
                 + "\nAlojamiento: " + alojamiento.getNombre()

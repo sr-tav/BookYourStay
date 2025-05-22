@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public abstract class Alojamiento {
+public abstract class Alojamiento implements Serializable {
 
     private String id, nombre, ciudad, descripcion;
     public float precioNoche;
@@ -26,11 +27,7 @@ public abstract class Alojamiento {
      */
     @Override
     public String toString() {
-        return   nombre + '\'' +
-                ciudad + '\'' +
-                precioNoche +
-                capacidadMaxima;
-
+        return getClass().getSimpleName() + ": " + nombre;
     }
 }
 

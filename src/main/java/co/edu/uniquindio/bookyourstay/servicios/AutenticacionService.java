@@ -70,6 +70,7 @@ public class AutenticacionService {
 
         cliente.setEstadoCuenta(true);
         cliente.setCodigoActivacion(null);
+        usuarioRepositorio.actualizar(cliente);
         return true;
     }
 
@@ -91,12 +92,8 @@ public class AutenticacionService {
      * @param email
      * @throws Exception
      */
-    public void enviarCodigoRecuperacion(String email) throws Exception {
+    public void enviarCodigoRecuperacion(String email)  {
         Usuario usuario = usuarioRepositorio.obtenerPorEmail(email);
-
-        if (usuario == null) {
-            throw new Exception("No existe un usuario con ese correo.");
-        }
 
         String codigo = generarCodigo();
         usuario.setCodigoRecuperacion(codigo);
@@ -138,7 +135,7 @@ public class AutenticacionService {
      * @return
      * @throws Exception
      */
-    public String generarCodigo() throws Exception {
+    public String generarCodigo() {
 
         int codigo = new Random().nextInt(999999);
         String codigoFormateado = String.format("%06d", codigo);

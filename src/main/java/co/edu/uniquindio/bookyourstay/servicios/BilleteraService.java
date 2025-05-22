@@ -1,8 +1,16 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
 import co.edu.uniquindio.bookyourstay.modelo.BilleteraVirtual;
+import co.edu.uniquindio.bookyourstay.modelo.Cliente;
+import co.edu.uniquindio.bookyourstay.repositorios.UsuarioRepositorio;
 
 public class BilleteraService {
+
+    private UsuarioRepositorio usuarioRepositorio;
+
+    public BilleteraService(UsuarioRepositorio usuarioRepositorio) {
+        this.usuarioRepositorio = usuarioRepositorio;
+    }
 
     /**
      * metodo que recarga billetera
@@ -25,5 +33,18 @@ public class BilleteraService {
             return true;
         }
         return false;
+    }
+
+    public void procesarPago(String cedulaCliente, float monto) throws Exception {
+        Cliente cliente = (Cliente) usuarioRepositorio.obtenerPorCedula(cedulaCliente);
+        if (cliente == null) {
+            throw new Exception("Cliente no encontrado.");
+        }
+
+        if (cliente.getBilleteraVirtual().getSaldo() < monto) {
+            throw new Exception("Fondos insuficientes.");
+        }
+
+        cliente.getBilleteraVirtual().setSaldo(cliente.getBilleteraVirtual().getSaldo() - monto);
     }
 }

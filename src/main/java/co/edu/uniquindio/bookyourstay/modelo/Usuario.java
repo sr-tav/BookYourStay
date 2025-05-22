@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-public abstract class Usuario {
+public abstract class Usuario implements Serializable {
 
     private String nombre, cedula, telefono, email, contrasenia, codigoActivacion, codigoRecuperacion;
     private Boolean estadoCuenta;

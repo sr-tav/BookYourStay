@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.bookyourstay.controladores.CambioContraseniaControlador"
+      spacing="20" alignment="CENTER"
+      style="-fx-padding: 40; -fx-background-color: linear-gradient(to bottom right, #f2f9fc, #dceef9);">
+
+    <Label text="Confirmar cambio de contraseña"
+           style="-fx-font-size: 20px; -fx-text-fill: #05445E; -fx-font-weight: bold;" />
+
+    <TextField fx:id="txtCodigo" promptText="Código recibido por correo"
+               style="-fx-background-radius: 8; -fx-padding: 8;" />
+
+    <PasswordField fx:id="txtNuevaContrasena" promptText="Nueva contraseña"
+                   style="-fx-background-radius: 8; -fx-padding: 8;" />
+
+    <Button text="Confirmar"
+            onAction="#confirmarCambio"
+            style="-fx-background-color: #1E81B0; -fx-text-fill: white; -fx-background-radius: 10;" />
+
+    <Label fx:id="lblMensaje" textFill="green" visible="false" />
+
+</VBox>

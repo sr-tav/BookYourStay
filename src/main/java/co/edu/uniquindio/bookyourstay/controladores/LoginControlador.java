@@ -1,6 +1,7 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
 import co.edu.uniquindio.bookyourstay.modelo.Administrador;
+import co.edu.uniquindio.bookyourstay.modelo.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.Usuario;
 import co.edu.uniquindio.bookyourstay.servicios.AutenticacionService;
 import javafx.event.ActionEvent;
@@ -67,6 +68,11 @@ public class LoginControlador {
     public void irPanelAdmin() {
         navegarVentana("/panelAdministrador.fxml", "Banco - Panel Cliente");
 
+    }
+
+
+    public void irVerificacion(Cliente cliente) {
+        navegarVentana("/verificacion.fxml", "BookYourStay - Iniciar Sesión");
     }
 
 

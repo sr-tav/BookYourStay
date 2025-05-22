@@ -163,7 +163,6 @@ public class GestionAlojamientosControldor implements Initializable, IActualizac
                         .mostrarAlerta("Alojamiento eliminado correctamente", Alert.AlertType.INFORMATION);
 
                 cargarAlojamientos(); // Actualizar la tabla después de eliminar
-                gestionOfertasControlador.cargarOfertas();
             }
         } else {
             ControladorPrincipal.getInstancia()

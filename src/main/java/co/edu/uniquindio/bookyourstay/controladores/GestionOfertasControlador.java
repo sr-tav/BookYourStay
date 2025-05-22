@@ -11,13 +11,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GestionOfertasControlador implements Initializable, IActualizacion {
@@ -89,7 +88,7 @@ public class GestionOfertasControlador implements Initializable, IActualizacion 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId().toString()));
+        colId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         colAlojamiento.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getAlojamiento().getNombre())));
         colInicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaInicio().toString()));
         colFin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaFin().toString()));
@@ -114,6 +113,32 @@ public class GestionOfertasControlador implements Initializable, IActualizacion 
         ofertaObservableList.setAll(ofertas);
 
         tablaOfertas.setItems(ofertaObservableList);
+    }
+
+    public void eliminarOferta(ActionEvent e) {
+        Oferta ofertaSeleccionada = tablaOfertas.getSelectionModel().getSelectedItem();
+
+        if (ofertaSeleccionada != null) {
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("Confirmar eliminación");
+            confirmacion.setHeaderText(null);
+            confirmacion.setContentText("¿Está seguro de que desea eliminar este alojamiento?");
+            Optional<ButtonType> resultado = confirmacion.showAndWait();
+
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                ControladorPrincipal.getInstancia()
+                        .getAdministradorService()
+                        .eliminarOferta(ofertaSeleccionada);
+
+                ControladorPrincipal.getInstancia()
+                        .mostrarAlerta("Alojamiento eliminado correctamente", Alert.AlertType.INFORMATION);
+
+                cargarOfertas(); // Actualizar la tabla después de eliminar
+            }
+        } else {
+            ControladorPrincipal.getInstancia()
+                    .mostrarAlerta("Seleccione un alojamiento para eliminar", Alert.AlertType.WARNING);
+        }
     }
 }
 

@@ -4,11 +4,12 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
-public class Casa extends Alojamiento {
+public class Casa extends Alojamiento implements Serializable {
 
 
     public Casa(String id, String nombre, String ciudad, String descripcion, float precioNoche, int capacidadMaxima, Image imagenAlojamiento, List<String> servicios) {

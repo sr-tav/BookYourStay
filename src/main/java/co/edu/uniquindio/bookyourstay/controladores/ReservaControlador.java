@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
+import co.edu.uniquindio.bookyourstay.modelo.Factura;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import javax.swing.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -68,6 +71,31 @@ public class ReservaControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cargarAlojamientosDisponibles();
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, 1);
+        spinnerHuespedes.setValueFactory(valueFactory);
+    }
+
+    public void realizarReserva(ActionEvent e){
+        try{
+            Alojamiento alojamiento = listaAlojamientos.getSelectionModel().getSelectedItem();
+            LocalDate inicio = fechaEntradaPicker.getValue();
+            LocalDate fin = fechaSalidaPicker.getValue();
+            int huespedes = spinnerHuespedes.getValue();
+            String cedula = controladorPrincipal.getUsuarioActual().getCedula();
+
+            controladorPrincipal.getReservaService().realizarReserva(cedula, alojamiento, inicio, fin, huespedes);
+            limpiarCampos();
+            controladorPrincipal.mostrarAlerta("reserva creada exitosamente", Alert.AlertType.INFORMATION);
+
+        } catch (Exception ex){
+            controladorPrincipal.mostrarAlerta(ex.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    public void limpiarCampos(){
+        fechaEntradaPicker.setValue(null);
+        fechaSalidaPicker.setValue(null);
+        spinnerHuespedes.getValueFactory().setValue(1);
     }
 }
 

@@ -2,11 +2,14 @@ package co.edu.uniquindio.bookyourstay.modelo;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 
 @Getter
 @Setter
 @SuperBuilder
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements Serializable {
 
     private BilleteraVirtual billeteraVirtual;
 

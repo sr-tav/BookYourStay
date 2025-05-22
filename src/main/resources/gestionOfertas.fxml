@@ -34,7 +34,7 @@
                 minWidth="100" minHeight="35" disable="true"
                 fx:id="btnEditar"/>
 
-        <Button text="Eliminar"
+        <Button text="Eliminar" onAction="#eliminarOferta"
                 style="-fx-font-weight: bold;
                        -fx-background-color: #f44336;
                        -fx-text-fill: white;

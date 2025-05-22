@@ -49,7 +49,7 @@ public class MisReservasControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         id.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
-        cliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().toString()));
+        cliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getNombre()));
         alojamiento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAlojamiento().toString()));
         inicio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaInicio().toString()));
         fin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaFin().toString()));

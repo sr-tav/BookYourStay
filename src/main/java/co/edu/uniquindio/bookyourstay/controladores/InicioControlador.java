@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,16 +25,21 @@ public class InicioControlador implements Initializable {
     private TextField campoBusqueda;
 
     @FXML
-    private ListView<String> listaAlojamientos;
+    private ListView<Alojamiento> listaAlojamientos;
 
     @FXML
     private ListView<Oferta> listaOfertas;
 
-    private final AlojamientoService alojamientoService = new AlojamientoService(new AlojamientoRepositorio());
+    private final ControladorPrincipal controladorPrincipal;
+
+    public InicioControlador() {
+        this.controladorPrincipal = ControladorPrincipal.getInstancia();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mostrarAlojamientosAleatorios();
+        mostrarOfertas();
     }
 
     public void navegarVentana(String nombreArchivoFxml, String tituloVentana) {
@@ -69,13 +75,48 @@ public class InicioControlador implements Initializable {
     }
 
     public void mostrarAlojamientosAleatorios() {
-        List<Alojamiento> aleatorios = alojamientoService.obtenerAlojamientosAleatorios(5);
+        List<Alojamiento> aleatorios = controladorPrincipal.getAlojamientoService().obtenerAlojamientosAleatorios(5);
 
+        // Limpiar el ListView y añadir directamente los objetos
         listaAlojamientos.getItems().clear();
-        for (Alojamiento a : aleatorios) {
-            listaAlojamientos.getItems().add(a.getNombre() + " - " + a.getCiudad());
-        }
+        listaAlojamientos.getItems().addAll(aleatorios);
+
+        // Personalizar cómo se muestran los alojamientos (opcional, solo si aún no lo hiciste)
+        listaAlojamientos.setCellFactory(lv -> new ListCell<Alojamiento>() {
+            @Override
+            protected void updateItem(Alojamiento item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getNombre() + " - " + item.getCiudad()); // o lo que necesites mostrar
+                }
+            }
+        });
     }
+
+
+    public void mostrarOfertas(){
+        List<Oferta> ofertas = controladorPrincipal.getOfertaRepositorio().listar();
+
+        // Limpiar el ListView y añadir directamente los objetos
+        listaOfertas.getItems().clear();
+        listaOfertas.getItems().addAll(ofertas);
+
+        // Personalizar cómo se muestran los alojamientos (opcional, solo si aún no lo hiciste)
+        listaOfertas.setCellFactory(lv -> new ListCell<Oferta>() {
+            @Override
+            protected void updateItem(Oferta item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getAlojamiento().getNombre() + " - " + item.getPorcentaje()); // o lo que necesites mostrar
+                }
+            }
+        });
+    }
+
 
 }
 
