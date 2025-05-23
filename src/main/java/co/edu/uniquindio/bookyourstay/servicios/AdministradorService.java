@@ -42,7 +42,7 @@ public class AdministradorService {
      * @throws Exception
      */
     public void registrarAlojamiento(String tipo, String nombre, String ciudad,
-                                     String descripcion, float precioNoche, int capacidadMaxima, Image imagenAlojamiento, List<String> servicios) throws Exception {
+                                     String descripcion, float precioNoche, int capacidadMaxima, String imagenAlojamiento, List<String> servicios) throws Exception {
 
         String mensajesValidacion = "";
 
